@@ -1,0 +1,846 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About — GR8 Web Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0a0a0a;
+    --off: #111111;
+    --mid: #1e1e1e;
+    --steel: #2c2c2c;
+    --muted: #888;
+    --white: #ffffff;
+    --acid: #E8500A;
+    --acid2: #ff8c55;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .wrap {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 4rem;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-inner {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 1.2rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--acid); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-right { display: flex; align-items: center; gap: 0.8rem; }
+  .nav-cta {
+    background: var(--white);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.65rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--acid); color: var(--white); transform: translateY(-1px); }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    background: var(--acid);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 1rem 2.2rem;
+    border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: #cf4508; transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.25);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 1rem 2.2rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--white); }
+
+  /* ── SECTION BASE ── */
+  section { padding: 6rem 0; }
+  section + section { border-top: 1px solid rgba(255,255,255,0.06); }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--acid);
+    margin-bottom: 1rem;
+  }
+  .section-label::before {
+    content: ''; display: block;
+    width: 24px; height: 2px; background: var(--white);
+  }
+  h2.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 560px;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 10rem 0 5rem;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute; top: -150px; right: -150px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232,80,10,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .page-header-inner {
+    position: relative; z-index: 2;
+  }
+  .page-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 6vw, 6.5rem);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: 1.5rem;
+  }
+  .page-header h1 span { color: var(--acid); }
+  .page-header p {
+    font-size: 1.15rem;
+    color: #aaa;
+    max-width: 560px;
+    line-height: 1.75;
+  }
+
+  /* ── WHO WE ARE ── */
+  #who { background: var(--off); }
+  .who-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .who-text p {
+    color: #bbb;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    margin-bottom: 1.5rem;
+  }
+  .who-text p:last-child { margin-bottom: 0; }
+  .who-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .who-stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .who-stat {
+    background: var(--mid);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-left: 3px solid var(--acid);
+    padding: 1.5rem;
+  }
+  .who-stat-num {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    color: var(--acid);
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .who-stat-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── MEET HARDEL ── */
+  #meet { background: var(--ink); }
+  .meet-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .founder-photo-wrap {
+    width: 100%;
+    margin-top: 3rem;
+    overflow: hidden;
+  }
+  .founder-photo {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center top;
+    margin-bottom: -4px;
+  }
+  .meet-bio h3 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .meet-bio .meet-role {
+    font-size: 0.82rem;
+    color: var(--acid);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    display: block;
+  }
+  .meet-bio p {
+    color: #bbb;
+    font-size: 1rem;
+    line-height: 1.85;
+    margin-bottom: 1.4rem;
+  }
+  .meet-bio p:last-child { margin-bottom: 0; }
+  .meet-divider {
+    width: 40px; height: 2px;
+    background: var(--acid);
+    margin: 2rem 0;
+  }
+  .meet-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-top: 2rem;
+  }
+  .meet-tag {
+    background: rgba(232,80,10,0.1);
+    border: 1px solid rgba(232,80,10,0.25);
+    color: var(--acid);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.35rem 0.8rem;
+  }
+
+  /* ── MISSION ── */
+  #mission { background: var(--off); }
+  .mission-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .mission-quote {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.1;
+    color: var(--acid);
+  }
+  .mission-body p {
+    color: #bbb;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    margin-bottom: 1.5rem;
+  }
+  .mission-body p:last-child { margin-bottom: 0; }
+
+  /* ── HOW WE WORK ── */
+  #how { background: var(--ink); }
+  .how-steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5px;
+    background: rgba(255,255,255,0.05);
+    margin-top: 1rem;
+  }
+  .how-step {
+    background: var(--ink);
+    padding: 2.5rem;
+    position: relative;
+    transition: background 0.25s;
+  }
+  .how-step:hover { background: var(--mid); }
+  .how-step::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--acid);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .how-step:hover::after { transform: scaleX(1); }
+  .how-step-num {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+  .how-step h3 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    color: var(--white);
+  }
+  .how-step p { color: var(--muted); font-size: 0.9rem; line-height: 1.75; }
+
+  /* ── WHY GR8 ── */
+  #why-ng8 { background: var(--off); }
+  .why-ng8-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .why-ng8-statement {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.05;
+  }
+  .why-ng8-statement span { color: var(--acid); }
+  .why-ng8-body p {
+    color: #bbb;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    margin-bottom: 1.5rem;
+  }
+  .why-ng8-body p:last-child { margin-bottom: 0; }
+
+  /* ── WHY METRICS ── */
+  .why-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+    padding-top: 4rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .why-metric { text-align: center; padding: 2rem 1rem; }
+  .why-metric-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem; color: var(--acid);
+    letter-spacing: 2px; line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .why-metric:nth-child(even) .why-metric-num { color: var(--white); }
+  .why-metric h4 {
+    font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .why-metric p { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+
+  /* ── SOCIAL STRIP ── */
+  .social-strip {
+    background: #050505;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 2rem 0;
+  }
+  .social-strip-inner {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  .social-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-right: 0.75rem;
+  }
+  .social-btn {
+    width: 44px; height: 44px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+  }
+  .social-btn:hover {
+    background: rgba(232,80,10,0.15);
+    border-color: var(--acid);
+    color: var(--white);
+  }
+  .social-btn svg { width: 17px; height: 17px; fill: currentColor; }
+
+  /* ── COMING SOON TOOLTIP ── */
+  .social-coming-tip {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--acid);
+    color: #fff;
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    padding: 5px 11px;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    z-index: 200;
+  }
+  .social-coming-tip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--acid);
+  }
+  .social-coming-tip.fade-out { opacity: 0; }
+
+  .social-divider {
+    width: 1px;
+    height: 28px;
+    background: rgba(255,255,255,0.12);
+    margin: 0 0.5rem;
+  }
+
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    background: var(--acid);
+    padding: 4rem 0;
+  }
+  .cta-banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .cta-banner h3 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3vw, 3rem);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.05;
+  }
+  .cta-banner p {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.8);
+    margin-top: 0.4rem;
+  }
+  .btn-white {
+    background: var(--white);
+    color: var(--acid);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 1rem 2.2rem;
+    border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    text-decoration: none; display: inline-block;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .btn-white:hover { background: var(--ink); color: var(--white); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050505;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-inner {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 3rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem; letter-spacing: 2px;
+    text-decoration: none; color: var(--white);
+  }
+  .footer-logo span { color: var(--acid); }
+  footer p { color: var(--muted); font-size: 0.8rem; }
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease both; }
+  .fade-up-2 { animation: fadeUp 0.7s 0.1s ease both; }
+  .fade-up-3 { animation: fadeUp 0.7s 0.2s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .wrap { padding: 0 2rem; }
+    .nav-inner { padding: 1.2rem 2rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 0; }
+    .page-header { padding: 8rem 0 3.5rem; }
+    .who-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .who-stat-row { grid-template-columns: 1fr 1fr; }
+    .meet-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .founder-photo-wrap { max-width: 320px; margin-top: 0; }
+    .founder-photo { aspect-ratio: 1/1; object-fit: cover; }
+    .mission-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .how-steps { grid-template-columns: 1fr; }
+    .why-ng8-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .why-metrics { grid-template-columns: 1fr 1fr; }
+    .cta-banner-inner { flex-direction: column; align-items: flex-start; }
+    .footer-inner { flex-direction: column; padding: 2rem; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">GR8<span> WEB DESIGN</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#work" data-i18n="nav-projects">Projects</a></li>
+      <li><a href="index.html#services" data-i18n="nav-services">Services</a></li>
+      <li><a href="index.html#maintenance" data-i18n="nav-maintenance">Maintenance</a></li>
+      <li><a href="index.html#quote" data-i18n="nav-contact">Contact</a></li>
+      <li><a href="about.html" class="active" data-i18n="nav-about">About Us</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="index.html#quote" class="nav-cta" data-i18n="nav-cta">Get a Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="wrap">
+    <div class="page-header-inner">
+      <div class="section-label fade-up" data-i18n="about-page-label">Our Story</div>
+      <h1 class="fade-up-2" data-i18n-html="about-page-h1">About <span>GR8</span> Web Design</h1>
+      <p class="fade-up-3" data-i18n="about-page-sub">One person. One standard. Built for the businesses that make communities run.</p>
+    </div>
+  </div>
+</div>
+
+<!-- WHO WE ARE -->
+<section id="who">
+  <div class="wrap">
+    <div class="who-layout">
+      <div class="who-text">
+        <div class="section-label" data-i18n="who-label">Who We Are</div>
+        <h2 class="section-title" data-i18n="who-title">Built Different.<br>On Purpose.</h2>
+        <p data-i18n="who-p1">GR8 Web Design is a one-person operation built on a simple belief — small businesses deserve great websites without the agency runaround. Based out of Northern Virginia, this isn't a firm full of account managers passing your project down a chain. It's one person, one vision, and a relentless commitment to doing the work right.</p>
+        <p data-i18n="who-p2">Powered by the latest AI-assisted design tools and a professional background in technology and user experience, GR8 punches well above its weight — delivering professional, high-quality websites that compete with anything a big agency would charge triple for.</p>
+      </div>
+      <div class="who-visual">
+        <div class="who-stat-row">
+          <div class="who-stat">
+            <div class="who-stat-num">1</div>
+            <div class="who-stat-label" data-i18n="who-stat-1">Point of Contact</div>
+          </div>
+          <div class="who-stat">
+            <div class="who-stat-num">2WK</div>
+            <div class="who-stat-label" data-i18n="who-stat-2">Avg. Turnaround</div>
+          </div>
+          <div class="who-stat">
+            <div class="who-stat-num" style="font-size:1.9rem;letter-spacing:1px">1:1</div>
+            <div class="who-stat-label" data-i18n="who-stat-3">Personal Design</div>
+          </div>
+          <div class="who-stat">
+            <div class="who-stat-num">$0</div>
+            <div class="who-stat-label" data-i18n="who-stat-4">Free Quote</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEET HARDEL -->
+<section id="meet">
+  <div class="wrap">
+    <div class="meet-layout">
+      <div class="founder-photo-wrap">
+        <img src="hardel.jpeg" alt="Hardel Santos — Founder of GR8 Web Design" class="founder-photo">
+      </div>
+      <div class="meet-bio">
+        <div class="section-label" data-i18n="meet-label">Meet the Founder</div>
+        <h3 data-i18n="meet-name">Hardel Santos</h3>
+        <span class="meet-role" data-i18n="meet-role">Founder · Designer · Developer · Your Single Point of Contact</span>
+
+        <p data-i18n="meet-p1">Hi, I'm Hardel Santos — the founder, designer, developer, and single point of contact behind GR8 Web Design. I'm a Northern Virginia local, a husband, and a proud father to my son. Outside of building websites, family is everything to me — and that same sense of care and responsibility carries directly into how I run this business.</p>
+
+        <p data-i18n="meet-edu">I studied Business Administration with a concentration in Management Information Systems — a background that bridges both strategic thinking and technical execution. I'm also an AWS Certified Cloud Practitioner, which means I understand cloud architecture and can ensure your website is deployed on infrastructure that's reliable, scalable, and built to last.</p>
+
+        <div class="meet-divider"></div>
+
+        <p data-i18n="meet-p2">My entire professional career has been spent as a federal contractor serving two of the most mission-critical agencies in the country — the Department of Veterans Affairs and the General Services Administration. In that time, I focused on improving systems, enhancing user experience, strengthening security, and sharpening communication between teams and the people they serve.</p>
+
+        <p data-i18n="meet-p3">That background isn't just a resume line. It means when I build your website, I'm thinking about how real people use it, how secure it is, how well it communicates your message, and how smoothly every piece of it works together. That's the standard I was trained to hold — and it's the standard I bring to every client.</p>
+
+        <div class="meet-tags">
+          <span class="meet-tag" data-i18n="tag-mis">Mgmt. Info. Systems</span>
+          <span class="meet-tag" data-i18n="tag-aws">AWS Cloud Practitioner</span>
+          <span class="meet-tag" data-i18n="tag-va">Dept. of Veterans Affairs</span>
+          <span class="meet-tag" data-i18n="tag-gsa">General Services Administration</span>
+          <span class="meet-tag" data-i18n="tag-ux">User Experience</span>
+          <span class="meet-tag" data-i18n="tag-sec">Security</span>
+          <span class="meet-tag" data-i18n="tag-centreville">Northern Virginia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR MISSION -->
+<section id="mission">
+  <div class="wrap">
+    <div class="mission-layout">
+      <div>
+        <div class="section-label" data-i18n="mission-label">Our Mission</div>
+        <div class="mission-quote" data-i18n="mission-quote">Take the Digital Burden Off Your Plate.</div>
+      </div>
+      <div class="mission-body">
+        <p data-i18n="mission-p1">You started your business because you're great at what you do — not because you wanted to learn web design, hosting, DNS settings, or SEO. That's where we come in.</p>
+        <p data-i18n="mission-p2">GR8 Web Design exists to take the entire digital burden off your plate. We build, deploy, and maintain your website so you can stay focused on running your business.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section id="how">
+  <div class="wrap">
+    <div class="section-label" data-i18n="how-label">How We Work</div>
+    <h2 class="section-title" data-i18n="how-title">No Mystery. No Middlemen.</h2>
+    <p class="section-sub" data-i18n="how-sub">There are no hidden teams, no outsourced developers, no mystery. When you work with GR8, you always know exactly who you're working with.</p>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step-num">01</div>
+        <h3 data-i18n="how-1-title">One Person from Day One</h3>
+        <p data-i18n="how-1-desc">You'll meet the man behind the curtain from day one — and that person is Hardel, with you from the first conversation to launch day and beyond. No account managers. No hand-offs.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">02</div>
+        <h3 data-i18n="how-2-title">Care Over Speed</h3>
+        <p data-i18n="how-2-desc">We don't rush work for a quick payout. Every site is built with care, attention to detail, and a standard we're proud to put our name on. If it's not right, we don't ship it.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">03</div>
+        <h3 data-i18n="how-3-title">Transparent Process</h3>
+        <p data-i18n="how-3-desc">You'll know where your project stands at every step. No black boxes, no surprise timelines — just clear communication and honest progress updates throughout.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">04</div>
+        <h3 data-i18n="how-4-title">Beyond Launch</h3>
+        <p data-i18n="how-4-desc">The relationship doesn't end when the site goes live. Our maintenance plan keeps us involved in the health, performance, and evolution of your site for as long as you need.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY GR8 -->
+<section id="why-ng8">
+  <div class="wrap">
+    <div class="why-ng8-inner">
+      <div class="why-ng8-statement" data-i18n-html="why-ng8-statement">Being a Startup Means We Have <span>Something to Prove.</span></div>
+      <div class="why-ng8-body">
+        <div class="section-label" data-i18n="why-ng8-label">Why GR8?</div>
+        <p data-i18n="why-ng8-p1">We're not coasting on a reputation. We're building one. That means you get our best work, every time — not the work of an overextended agency bouncing between a dozen clients.</p>
+        <p data-i18n="why-ng8-p2">Every project we take on is a chance to prove what this business is capable of. That hunger doesn't go away. It's what drives every pixel, every line of code, and every client interaction.</p>
+      </div>
+    </div>
+    <div class="why-metrics">
+      <div class="why-metric">
+        <div class="why-metric-num">100%</div>
+        <h4 data-i18n="why-metric-1-title">Small Business Focus</h4>
+        <p data-i18n="why-metric-1-desc">No corporate bloat. Every solution is built around what works for businesses like yours.</p>
+      </div>
+      <div class="why-metric">
+        <div class="why-metric-num">2WK</div>
+        <h4 data-i18n="why-metric-2-title">Fast Turnaround</h4>
+        <p data-i18n="why-metric-2-desc">Most builds go live in 2 weeks or less. No months-long waits or drawn-out processes.</p>
+      </div>
+      <div class="why-metric">
+        <div class="why-metric-num">24/7</div>
+        <h4 data-i18n="why-metric-3-title">Uptime Monitoring</h4>
+        <p data-i18n="why-metric-3-desc">We watch your site around the clock on all maintenance plans so you never miss a beat.</p>
+      </div>
+      <div class="why-metric">
+        <div class="why-metric-num">$0</div>
+        <h4 data-i18n="why-metric-4-title">Free Quote</h4>
+        <p data-i18n="why-metric-4-desc">No obligation, no pressure. Tell us about your project and we'll send a custom proposal fast.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div class="wrap">
+    <div class="cta-banner-inner">
+      <div>
+        <h3 data-i18n="cta-title">Ready to Get Started?</h3>
+        <p data-i18n="cta-sub">Let's talk about your website. No pressure, no obligation — just a conversation.</p>
+      </div>
+      <a href="index.html#quote" class="btn-white" data-i18n="cta-btn">Get a Free Quote →</a>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL -->
+<div class="social-strip">
+  <div class="social-strip-inner">
+    <span class="social-label" data-i18n="social-label">Follow Along</span>
+    <a href="#" class="social-btn" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a href="#" class="social-btn" aria-label="Facebook">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+    <a href="#" class="social-btn" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+    </a>
+    <a href="#" class="social-btn" aria-label="X">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <span class="social-divider"></span>
+    <a href="https://www.linkedin.com/in/hardel-santos-sanchez-292918209" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">GR8<span> WEB DESIGN</span></a>
+    <p data-i18n="footer-copy">© 2025 GR8 Web Design. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="index.html#services" data-i18n="nav-services">Services</a>
+      <a href="index.html#maintenance" data-i18n="nav-maintenance">Plans</a>
+      <a href="index.html#quote" data-i18n="nav-contact">Contact</a>
+      <a href="about.html" data-i18n="nav-about">About</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+// Coming soon tooltips
+(function () {
+  var placeholders = ['Instagram', 'Facebook', 'TikTok', 'X'];
+  document.querySelectorAll('.social-btn').forEach(function (btn) {
+    if (placeholders.indexOf(btn.getAttribute('aria-label')) === -1) return;
+    btn.style.position = 'relative';
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (btn.querySelector('.social-coming-tip')) return;
+      var tip = document.createElement('span');
+      tip.className = 'social-coming-tip';
+      tip.textContent = 'Coming soon!';
+      btn.appendChild(tip);
+      setTimeout(function () {
+        tip.classList.add('fade-out');
+        setTimeout(function () { tip.remove(); }, 300);
+      }, 1800);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

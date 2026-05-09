@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Terms of Service — GR8 Web Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0a0a0a;
+    --off: #111111;
+    --mid: #1e1e1e;
+    --steel: #2c2c2c;
+    --muted: #888;
+    --light: #f5f5f0;
+    --white: #ffffff;
+    --acid: #E8500A;
+    --acid2: #ff8c55;
+    --white-soft: rgba(255,255,255,0.12);
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--acid); text-decoration: none; }
+  a:hover { color: var(--acid2); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nav-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 1rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .nav-logo { display: flex; align-items: center; }
+  .nav-logo-img { height: 105px; width: auto; display: block; }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--acid);
+    color: var(--white);
+    border: none;
+    padding: 0.65rem 1.5rem;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .nav-cta:hover { background: var(--acid2); transform: translateY(-1px); }
+
+  /* ── HAMBURGER ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px; height: 44px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.18);
+    cursor: pointer;
+    padding: 0;
+    transition: border-color 0.2s;
+  }
+
+  .nav-hamburger:hover { border-color: rgba(255,255,255,0.4); }
+
+  .hamburger-bar {
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  nav.nav-open .hamburger-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  nav.nav-open .hamburger-bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  nav.nav-open .hamburger-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-mobile-menu {
+    display: none;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+    background: rgba(10,10,10,0.97);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nav-mobile-links {
+    list-style: none;
+    padding: 1rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-mobile-links li a {
+    display: block;
+    padding: 0.85rem 0;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: color 0.2s;
+  }
+
+  .nav-mobile-links li:last-child a { border-bottom: none; }
+  .nav-mobile-links li a:hover { color: var(--white); }
+
+  .nav-mobile-cta-item { margin-top: 1rem; }
+
+  .nav-mobile-cta {
+    width: 100%;
+    padding: 0.9rem;
+    font-size: 0.88rem;
+  }
+
+  nav.nav-open .nav-mobile-menu { max-height: 400px; }
+
+  body.nav-locked { overflow: hidden; }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 10rem 3rem 4rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    background: linear-gradient(180deg, rgba(232,80,10,0.04) 0%, transparent 100%);
+  }
+
+  .page-header-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .page-header-label {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--acid);
+    margin-bottom: 1rem;
+  }
+
+  .page-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .page-header-meta {
+    color: var(--muted);
+    font-size: 0.85rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  /* ── LEGAL CONTENT ── */
+  .legal-body {
+    padding: 4rem 3rem 6rem;
+  }
+
+  .legal-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .legal-section {
+    margin-bottom: 3rem;
+  }
+
+  .legal-section h2 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--acid);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(232,80,10,0.18);
+  }
+
+  .legal-section h3 {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 1.25rem 0 0.5rem;
+  }
+
+  .legal-section p {
+    color: rgba(255,255,255,0.78);
+    font-size: 0.92rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .legal-section p:last-child { margin-bottom: 0; }
+
+  .legal-section ul {
+    list-style: none;
+    margin: 0.75rem 0 1rem 0;
+  }
+
+  .legal-section ul li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: rgba(255,255,255,0.72);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 0.35rem;
+  }
+
+  .legal-section ul li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--acid);
+  }
+
+  /* Contact block */
+  .legal-contact {
+    background: var(--mid);
+    border-left: 3px solid var(--acid);
+    padding: 1.5rem 1.75rem;
+    margin-top: 1rem;
+  }
+
+  .legal-contact p {
+    margin-bottom: 0.3rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .legal-contact a { font-size: 0.9rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--off);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo { display: flex; align-items: center; }
+  .footer-logo-img { height: 70px; width: auto; }
+
+  footer p { color: var(--muted); font-size: 0.8rem; }
+
+  .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+
+  .footer-links a {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--white); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .nav-hamburger { display: flex; }
+    .nav-right { display: none; }
+    .nav-mobile-menu { display: block; }
+    .nav-logo-img { height: 70px; }
+    .nav-inner { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-header { padding: 8rem 2rem 3rem; }
+    .legal-body { padding: 3rem 2rem 5rem; }
+    .footer-inner { flex-direction: column; padding: 2rem; text-align: center; }
+    .footer-links { justify-content: center; }
+    .footer-logo-img { height: 50px; }
+  }
+
+  @media (max-width: 480px) {
+    .nav-inner { padding: 0.9rem 1.25rem; }
+    .nav-logo-img { height: 56px; }
+    .page-header { padding: 7rem 1.25rem 2.5rem; }
+    .page-header h1 { font-size: clamp(2.2rem, 11vw, 3rem); }
+    .legal-body { padding: 2.5rem 1.25rem 4rem; }
+    .footer-inner { padding: 1.5rem 1.25rem; }
+    .footer-links { gap: 0.75rem; }
+    .footer-links a { font-size: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="brand_assets/Logo_Banner.png" alt="GR8 Web Design" class="nav-logo-img"></a>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Projects</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#maintenance">Maintenance</a></li>
+      <li><a href="index.html#quote">Contact</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation menu" aria-expanded="false">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+    <div class="nav-right">
+      <button class="nav-cta" onclick="window.location.href='index.html#quote'">Get a Quote</button>
+    </div>
+  </div>
+  <!-- Mobile dropdown nav -->
+  <div class="nav-mobile-menu" id="navMobileMenu" aria-hidden="true">
+    <ul class="nav-mobile-links">
+      <li><a href="index.html#work">Projects</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#maintenance">Maintenance</a></li>
+      <li><a href="index.html#quote">Contact</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li class="nav-mobile-cta-item"><button class="nav-cta nav-mobile-cta" onclick="closeNav();window.location.href='index.html#quote'">Get a Quote</button></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-header-label">Legal</div>
+    <h1>Terms of Service</h1>
+    <div class="page-header-meta">
+      <span>Effective Date: May 9, 2025</span>
+      <span>Last Updated: May 9, 2025</span>
+    </div>
+  </div>
+</div>
+
+<!-- LEGAL CONTENT -->
+<div class="legal-body">
+  <div class="legal-inner">
+
+    <div class="legal-section">
+      <h2>1. Agreement to Terms</h2>
+      <p>By accessing our website or engaging GR8 Web Design for services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our website or services. These terms apply to all visitors, clients, and anyone who submits a quote request or enters into a service agreement with us.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>2. Services Offered</h2>
+      <p>GR8 Web Design provides the following services to small businesses and individuals:</p>
+      <ul>
+        <li>New website design and development</li>
+        <li>Website redesigns and modernization</li>
+        <li>E-commerce setup and integration</li>
+        <li>SEO optimization</li>
+        <li>Monthly website maintenance subscription plans</li>
+        <li>General web consulting</li>
+      </ul>
+      <p>The specific scope of services for each client is defined in a separate project proposal or service agreement provided prior to work beginning.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>3. Quote Requests</h2>
+      <p>Submitting a quote request through our website does not constitute a binding agreement or guarantee of service. A quote request is an expression of interest only. Work does not begin until both parties have agreed on scope, pricing, and timeline in writing.</p>
+      <p>We reserve the right to decline any project at our discretion.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>4. Payments</h2>
+      <h3>One-Time Projects</h3>
+      <ul>
+        <li>A deposit of 50% of the total project cost is required before work begins</li>
+        <li>The remaining 50% is due upon project completion and prior to site launch</li>
+        <li>Invoices are issued via our billing system and are due within 7 days of receipt</li>
+      </ul>
+      <h3>Monthly Maintenance Plans</h3>
+      <ul>
+        <li>Subscription plans are billed monthly on a recurring basis</li>
+        <li>Billing begins on the date the plan is activated</li>
+        <li>Plans automatically renew each month unless cancelled in accordance with Section 6</li>
+      </ul>
+      <h3>Late Payments</h3>
+      <ul>
+        <li>Invoices not paid within 14 days of the due date may result in work being paused</li>
+        <li>We reserve the right to suspend maintenance services for accounts more than 30 days past due</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2>5. Refund Policy</h2>
+      <h3>One-Time Projects</h3>
+      <ul>
+        <li>The 50% deposit is non-refundable once work has begun</li>
+        <li>If a project is cancelled before work begins, a full refund of any deposit paid will be issued</li>
+        <li>If a project is cancelled after work has begun, you will be billed for work completed to date</li>
+      </ul>
+      <h3>Monthly Maintenance Plans</h3>
+      <ul>
+        <li>Maintenance plans may be cancelled at any time (see Section 6)</li>
+        <li>We do not offer prorated refunds for partial months</li>
+        <li>If you are unsatisfied with our service, contact us and we will do our best to resolve the issue</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2>6. Cancellation Policy</h2>
+      <h3>Monthly Maintenance Plans</h3>
+      <ul>
+        <li>You may cancel your maintenance plan at any time by contacting us in writing via email</li>
+        <li>Cancellations must be submitted at least 7 days before your next billing date to avoid being charged for the following month</li>
+        <li>Upon cancellation, services will continue through the end of the current paid billing period</li>
+        <li>We reserve the right to cancel a maintenance plan with 30 days written notice</li>
+      </ul>
+      <h3>One-Time Projects</h3>
+      <ul>
+        <li>Either party may terminate a project with written notice</li>
+        <li>You will be billed for all work completed up to the cancellation date</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2>7. Client Responsibilities</h2>
+      <p>To ensure your project is completed on time and to your satisfaction, you agree to:</p>
+      <ul>
+        <li>Provide all necessary content, images, branding materials, and login credentials in a timely manner</li>
+        <li>Review and provide feedback on deliverables within 5 business days of submission</li>
+        <li>Designate a single point of contact for all project communication</li>
+        <li>Ensure you have the legal right to use all content and materials you provide to us</li>
+      </ul>
+      <p>Delays caused by late content delivery or feedback may result in project timeline adjustments.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>8. Intellectual Property</h2>
+      <h3>Your Content</h3>
+      <p>All content, images, logos, and materials you provide remain your property. You grant GR8 Web Design a limited license to use them solely for the purpose of completing your project.</p>
+      <h3>Our Work</h3>
+      <p>Upon receipt of final payment in full, you will own the completed website design and all custom code created specifically for your project.</p>
+      <h3>Portfolio Rights</h3>
+      <p>GR8 Web Design reserves the right to display completed work in our portfolio and use it in marketing materials, unless you request confidentiality in writing prior to project start.</p>
+      <h3>Third-Party Assets</h3>
+      <p>Any third-party themes, plugins, stock images, or licensed tools used in your project remain subject to their respective licenses. We will inform you of any third-party assets used.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>9. Warranties and Representations</h2>
+      <p>GR8 Web Design warrants that:</p>
+      <ul>
+        <li>Services will be performed professionally and in good faith</li>
+        <li>We will communicate openly and honestly about project progress</li>
+        <li>We will not knowingly incorporate stolen or unlicensed materials into your project</li>
+      </ul>
+      <p>We do not warrant that:</p>
+      <ul>
+        <li>Your website will achieve specific search engine rankings</li>
+        <li>Your website will generate a specific volume of traffic or sales</li>
+        <li>Third-party platforms, plugins, or hosting services will be free of outages or issues</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2>10. Limitation of Liability</h2>
+      <p>To the fullest extent permitted by law, GR8 Web Design shall not be liable for any indirect, incidental, special, or consequential damages arising from the use of our services or website. Our total liability to you for any claim arising from our services shall not exceed the total amount paid by you to GR8 Web Design in the three months preceding the claim.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>11. Governing Law</h2>
+      <p>These Terms of Service shall be governed by and construed in accordance with the laws of the Commonwealth of Virginia. Any disputes arising under these terms shall be subject to the exclusive jurisdiction of the courts located in Fairfax County, Virginia.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>12. Changes to These Terms</h2>
+      <p>We reserve the right to update these Terms of Service at any time. When we do, we will update the "Last Updated" date at the top of this page. Continued use of our services after changes are posted constitutes your acceptance of the revised terms. We will make reasonable efforts to notify active clients of material changes.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>13. Contact Us</h2>
+      <p>If you have any questions about these Terms of Service, please contact:</p>
+      <div class="legal-contact">
+        <p><strong>Hardel Santos-Sanchez</strong></p>
+        <p>GR8 Web Design</p>
+        <p>Centreville, VA</p>
+        <p><a href="mailto:Support@gr8webdesign.com">Support@gr8webdesign.com</a></p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo"><img src="brand_assets/Logo_Banner.png" alt="GR8 Web Design" class="footer-logo-img"></a>
+    <p>© 2025 GR8 Web Design. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#maintenance">Plans</a>
+      <a href="index.html#quote">Contact</a>
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var hamburger = document.getElementById('navHamburger');
+  var nav = document.querySelector('nav');
+  var mobileMenu = document.getElementById('navMobileMenu');
+  if (!hamburger || !nav || !mobileMenu) return;
+  function openNav() {
+    nav.classList.add('nav-open');
+    document.body.classList.add('nav-locked');
+    hamburger.setAttribute('aria-expanded', 'true');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+  }
+  function closeNav() {
+    nav.classList.remove('nav-open');
+    document.body.classList.remove('nav-locked');
+    hamburger.setAttribute('aria-expanded', 'false');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+  }
+  window.closeNav = closeNav;
+  hamburger.addEventListener('click', function () {
+    nav.classList.contains('nav-open') ? closeNav() : openNav();
+  });
+  mobileMenu.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () { closeNav(); });
+  });
+  document.addEventListener('click', function (e) {
+    if (nav.classList.contains('nav-open') && !nav.contains(e.target)) closeNav();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('nav-open')) { closeNav(); hamburger.focus(); }
+  });
+})();
+</script>
+
+</body>
+</html>

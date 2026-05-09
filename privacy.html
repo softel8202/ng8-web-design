@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Privacy Policy — GR8 Web Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0a0a0a;
+    --off: #111111;
+    --mid: #1e1e1e;
+    --steel: #2c2c2c;
+    --muted: #888;
+    --light: #f5f5f0;
+    --white: #ffffff;
+    --acid: #E8500A;
+    --acid2: #ff8c55;
+    --white-soft: rgba(255,255,255,0.12);
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--acid); text-decoration: none; }
+  a:hover { color: var(--acid2); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nav-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 1rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .nav-logo { display: flex; align-items: center; }
+  .nav-logo-img { height: 105px; width: auto; display: block; }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--acid);
+    color: var(--white);
+    border: none;
+    padding: 0.65rem 1.5rem;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .nav-cta:hover { background: var(--acid2); transform: translateY(-1px); }
+
+  /* ── HAMBURGER ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px; height: 44px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.18);
+    cursor: pointer;
+    padding: 0;
+    transition: border-color 0.2s;
+  }
+
+  .nav-hamburger:hover { border-color: rgba(255,255,255,0.4); }
+
+  .hamburger-bar {
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  nav.nav-open .hamburger-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  nav.nav-open .hamburger-bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  nav.nav-open .hamburger-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-mobile-menu {
+    display: none;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+    background: rgba(10,10,10,0.97);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nav-mobile-links {
+    list-style: none;
+    padding: 1rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-mobile-links li a {
+    display: block;
+    padding: 0.85rem 0;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: color 0.2s;
+  }
+
+  .nav-mobile-links li:last-child a { border-bottom: none; }
+  .nav-mobile-links li a:hover { color: var(--white); }
+
+  .nav-mobile-cta-item { margin-top: 1rem; }
+
+  .nav-mobile-cta {
+    width: 100%;
+    padding: 0.9rem;
+    font-size: 0.88rem;
+  }
+
+  nav.nav-open .nav-mobile-menu { max-height: 400px; }
+
+  body.nav-locked { overflow: hidden; }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 10rem 3rem 4rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    background: linear-gradient(180deg, rgba(232,80,10,0.04) 0%, transparent 100%);
+  }
+
+  .page-header-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .page-header-label {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--acid);
+    margin-bottom: 1rem;
+  }
+
+  .page-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .page-header-meta {
+    color: var(--muted);
+    font-size: 0.85rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .page-header-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+  /* ── LEGAL CONTENT ── */
+  .legal-body {
+    padding: 4rem 3rem 6rem;
+  }
+
+  .legal-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .legal-section {
+    margin-bottom: 3rem;
+  }
+
+  .legal-section h2 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--acid);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(232,80,10,0.18);
+  }
+
+  .legal-section p {
+    color: rgba(255,255,255,0.78);
+    font-size: 0.92rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .legal-section p:last-child { margin-bottom: 0; }
+
+  .legal-section ul {
+    list-style: none;
+    margin: 0.75rem 0 1rem 0;
+  }
+
+  .legal-section ul li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: rgba(255,255,255,0.72);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 0.35rem;
+  }
+
+  .legal-section ul li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--acid);
+  }
+
+  /* Third-party services table */
+  .legal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.88rem;
+  }
+
+  .legal-table th {
+    text-align: left;
+    padding: 0.7rem 1rem;
+    background: var(--mid);
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .legal-table td {
+    padding: 0.75rem 1rem;
+    color: rgba(255,255,255,0.72);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: top;
+  }
+
+  .legal-table tr:last-child td { border-bottom: none; }
+
+  .legal-table td a {
+    font-size: 0.82rem;
+    word-break: break-all;
+  }
+
+  /* Contact block */
+  .legal-contact {
+    background: var(--mid);
+    border-left: 3px solid var(--acid);
+    padding: 1.5rem 1.75rem;
+    margin-top: 1rem;
+  }
+
+  .legal-contact p {
+    margin-bottom: 0.3rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .legal-contact a { font-size: 0.9rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--off);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo { display: flex; align-items: center; }
+  .footer-logo-img { height: 70px; width: auto; }
+
+  footer p { color: var(--muted); font-size: 0.8rem; }
+
+  .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+
+  .footer-links a {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--white); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .nav-hamburger { display: flex; }
+    .nav-right { display: none; }
+    .nav-mobile-menu { display: block; }
+    .nav-logo-img { height: 70px; }
+    .nav-inner { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-header { padding: 8rem 2rem 3rem; }
+    .legal-body { padding: 3rem 2rem 5rem; }
+    .footer-inner { flex-direction: column; padding: 2rem; text-align: center; }
+    .footer-links { justify-content: center; }
+    .footer-logo-img { height: 50px; }
+  }
+
+  @media (max-width: 480px) {
+    .nav-inner { padding: 0.9rem 1.25rem; }
+    .nav-logo-img { height: 56px; }
+    .page-header { padding: 7rem 1.25rem 2.5rem; }
+    .page-header h1 { font-size: clamp(2.2rem, 11vw, 3rem); }
+    .legal-body { padding: 2.5rem 1.25rem 4rem; }
+    .legal-table { font-size: 0.8rem; }
+    .legal-table th, .legal-table td { padding: 0.6rem 0.75rem; }
+    .footer-inner { padding: 1.5rem 1.25rem; }
+    .footer-links { gap: 0.75rem; }
+    .footer-links a { font-size: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="brand_assets/Logo_Banner.png" alt="GR8 Web Design" class="nav-logo-img"></a>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Projects</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#maintenance">Maintenance</a></li>
+      <li><a href="index.html#quote">Contact</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation menu" aria-expanded="false">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+    <div class="nav-right">
+      <button class="nav-cta" onclick="window.location.href='index.html#quote'">Get a Quote</button>
+    </div>
+  </div>
+  <!-- Mobile dropdown nav -->
+  <div class="nav-mobile-menu" id="navMobileMenu" aria-hidden="true">
+    <ul class="nav-mobile-links">
+      <li><a href="index.html#work">Projects</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#maintenance">Maintenance</a></li>
+      <li><a href="index.html#quote">Contact</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li class="nav-mobile-cta-item"><button class="nav-cta nav-mobile-cta" onclick="closeNav();window.location.href='index.html#quote'">Get a Quote</button></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-header-label">Legal</div>
+    <h1>Privacy Policy</h1>
+    <div class="page-header-meta">
+      <span>Effective Date: May 9, 2025</span>
+      <span>Last Updated: May 9, 2025</span>
+    </div>
+  </div>
+</div>
+
+<!-- LEGAL CONTENT -->
+<div class="legal-body">
+  <div class="legal-inner">
+
+    <div class="legal-section">
+      <h2>1. Overview</h2>
+      <p>GR8 Web Design ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard the information you provide when you visit our website or inquire about our services. By using our website, you agree to the practices described in this policy.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>2. Information We Collect</h2>
+      <p>We collect information you voluntarily provide when submitting a quote request or contacting us. This may include:</p>
+      <ul>
+        <li>Full name</li>
+        <li>Email address</li>
+        <li>Phone number (optional)</li>
+        <li>Business name</li>
+        <li>Project details and budget range</li>
+        <li>Any additional information you include in your message</li>
+      </ul>
+      <p>We do not collect payment information through our website. All billing is handled through secure third-party payment processors.</p>
+      <p>We may also automatically collect non-personal technical data when you visit our site, including:</p>
+      <ul>
+        <li>Browser type and version</li>
+        <li>Device type (mobile, tablet, desktop)</li>
+        <li>Pages visited and time spent</li>
+        <li>Referring website or source</li>
+        <li>General geographic location (city/region level only)</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2>3. How We Use Your Information</h2>
+      <p>Information you provide is used exclusively to:</p>
+      <ul>
+        <li>Respond to your quote request or inquiry</li>
+        <li>Communicate with you about your project</li>
+        <li>Send project updates, invoices, and service-related communications</li>
+        <li>Improve our website and service offerings</li>
+      </ul>
+      <p>We do not sell, rent, trade, or share your personal information with third parties for marketing purposes — ever.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>4. How We Store and Protect Your Information</h2>
+      <p>Your information is transmitted via our contact form and delivered securely to our Google Workspace business email account using Gmail SMTP. We take reasonable precautions to protect your data from unauthorized access, including:</p>
+      <ul>
+        <li>SSL/HTTPS encryption on all site traffic</li>
+        <li>Secure, password-protected business email accounts</li>
+        <li>Limited access — only Hardel Santos-Sanchez, the sole owner of GR8 Web Design, has access to your submitted information</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2>5. Third-Party Services</h2>
+      <p>Our website uses the following third-party services that may process your data:</p>
+      <table class="legal-table">
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Purpose</th>
+            <th>Privacy Policy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Google Workspace</td>
+            <td>Business email communication</td>
+            <td><a href="https://workspace.google.com/terms" target="_blank" rel="noopener">workspace.google.com/terms</a></td>
+          </tr>
+          <tr>
+            <td>Render</td>
+            <td>Website hosting</td>
+            <td><a href="https://render.com/privacy" target="_blank" rel="noopener">render.com/privacy</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>We are not responsible for the privacy practices of these third-party providers. We encourage you to review their respective policies.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>6. Cookies</h2>
+      <p>Our website may use cookies and similar tracking technologies to analyze site traffic and usage patterns. These cookies do not collect personally identifiable information.</p>
+      <p>You may disable cookies through your browser settings at any time. Doing so will not affect your ability to use our website.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>7. Children's Privacy</h2>
+      <p>Our website and services are not directed at children under the age of 13. We do not knowingly collect personal information from children. If you believe a child has submitted information to us, please contact us immediately and we will delete it.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>8. Your Rights</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Request a copy of the personal information we hold about you</li>
+        <li>Request correction of inaccurate information</li>
+        <li>Request deletion of your information from our records</li>
+        <li>Opt out of any future communications from us at any time</li>
+      </ul>
+      <p>To exercise any of these rights, contact us at the email address below.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>9. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. When we do, we will update the "Last Updated" date at the top of this page. We encourage you to review this policy periodically. Continued use of our website after any changes constitutes your acceptance of the updated policy.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>10. Contact Us</h2>
+      <p>If you have any questions about this Privacy Policy, please contact:</p>
+      <div class="legal-contact">
+        <p><strong>Hardel Santos-Sanchez</strong></p>
+        <p>GR8 Web Design</p>
+        <p>Centreville, VA</p>
+        <p><a href="mailto:Support@gr8webdesign.com">Support@gr8webdesign.com</a></p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo"><img src="brand_assets/Logo_Banner.png" alt="GR8 Web Design" class="footer-logo-img"></a>
+    <p>© 2025 GR8 Web Design. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#maintenance">Plans</a>
+      <a href="index.html#quote">Contact</a>
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var hamburger = document.getElementById('navHamburger');
+  var nav = document.querySelector('nav');
+  var mobileMenu = document.getElementById('navMobileMenu');
+  if (!hamburger || !nav || !mobileMenu) return;
+  function openNav() {
+    nav.classList.add('nav-open');
+    document.body.classList.add('nav-locked');
+    hamburger.setAttribute('aria-expanded', 'true');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+  }
+  function closeNav() {
+    nav.classList.remove('nav-open');
+    document.body.classList.remove('nav-locked');
+    hamburger.setAttribute('aria-expanded', 'false');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+  }
+  window.closeNav = closeNav;
+  hamburger.addEventListener('click', function () {
+    nav.classList.contains('nav-open') ? closeNav() : openNav();
+  });
+  mobileMenu.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () { closeNav(); });
+  });
+  document.addEventListener('click', function (e) {
+    if (nav.classList.contains('nav-open') && !nav.contains(e.target)) closeNav();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('nav-open')) { closeNav(); hamburger.focus(); }
+  });
+})();
+</script>
+
+</body>
+</html>

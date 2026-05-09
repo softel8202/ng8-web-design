@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>GR8 Web Design — Websites for Small Business</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -274,55 +274,303 @@
     margin-bottom: 3.5rem;
   }
 
-  /* ── SERVICES ── */
+  /* ── SERVICES ACCORDION ── */
   #services { background: var(--off); }
-  .services-grid {
+
+  .svc-meta-row {
+    margin-top: clamp(36px, 4.5vw, 60px);
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5px;
-    background: rgba(255,255,255,0.05);
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
   }
-  .service-card {
-    background: var(--off);
-    padding: 2.5rem;
-    position: relative;
-    transition: background 0.25s;
-    overflow: hidden;
-  }
-  .service-card::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-    background: var(--acid);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-  }
-  .service-card:hover { background: var(--mid); }
-  .service-card:hover::after { transform: scaleX(1); }
-  .service-num {
-    font-family: var(--font-display);
-    font-size: 3.5rem;
-    color: rgba(255,255,255,0.1);
-    line-height: 1;
-    margin-bottom: 1rem;
-    letter-spacing: 2px;
-  }
-  .service-icon {
-    width: 44px; height: 44px;
-    background: rgba(232,80,10,0.12);
-    border: 1px solid rgba(232,80,10,0.25);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1.2rem;
-    font-size: 1.2rem;
-  }
-  .service-card h3 {
-    font-family: var(--font-display);
-    font-size: 1.6rem;
-    letter-spacing: 1px;
+  .svc-meta-key {
+    font-family: var(--font-body);
     text-transform: uppercase;
-    margin-bottom: 0.8rem;
+    letter-spacing: 0.16em;
+    font-size: 0.68rem;
+    color: var(--muted);
+    font-weight: 500;
   }
-  .service-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+  .svc-meta-key span { color: var(--white); }
+
+  .svc-list { margin-top: 0; }
+
+  .svc-row {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+  }
+  .svc-row.in { opacity: 1; transform: none; }
+
+  .svc-row::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(232,80,10,0.05) 50%, transparent);
+    opacity: 0;
+    transition: opacity .5s ease;
+    pointer-events: none;
+  }
+  .svc-row:hover::before { opacity: 1; }
+  .svc-row[data-open="true"]::before { opacity: 1; }
+
+  .svc-row-head {
+    all: unset;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 72px 1fr auto 52px;
+    align-items: center;
+    gap: clamp(16px, 2.5vw, 48px);
+    padding: clamp(22px, 2.6vw, 38px) 24px clamp(22px, 2.6vw, 38px) 8px;
+    width: 100%;
+    position: relative;
+    transition: padding-left .5s cubic-bezier(.2,.7,.2,1);
+  }
+  .svc-row:hover .svc-row-head,
+  .svc-row[data-open="true"] .svc-row-head { padding-left: 20px; }
+  .svc-row-head:focus-visible { outline: 1px solid var(--acid); outline-offset: -1px; }
+
+  .svc-num {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: color .4s ease;
+  }
+  .svc-row:hover .svc-num,
+  .svc-row[data-open="true"] .svc-num { color: var(--acid); }
+
+  .svc-title {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: clamp(1.35rem, 2.6vw, 2.2rem);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    color: var(--white);
+    transition: transform .55s cubic-bezier(.2,.7,.2,1);
+    transform-origin: left center;
+  }
+  .svc-title em { font-style: italic; color: rgba(255,255,255,0.45); font-weight: 400; }
+  .svc-row:hover .svc-title { transform: translateX(8px); }
+
+  .svc-tag {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.67rem;
+    color: var(--muted);
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  .svc-mark {
+    width: 52px; height: 52px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 999px;
+    display: grid; place-items: center;
+    color: rgba(255,255,255,0.5);
+    transition: border-color .4s ease, color .4s ease, transform .55s cubic-bezier(.2,.7,.2,1);
+    flex-shrink: 0;
+  }
+  .svc-row:hover .svc-mark,
+  .svc-row[data-open="true"] .svc-mark {
+    border-color: var(--acid);
+    color: var(--acid);
+    transform: rotate(-12deg);
+  }
+  .svc-mark svg { width: 20px; height: 20px; display: block; overflow: visible; }
+  .svc-mark svg [data-anim] { transition: all .6s cubic-bezier(.2,.7,.2,1); transform-box: fill-box; transform-origin: center; }
+  .svc-row:hover .svc-mark .a1,
+  .svc-row[data-open="true"] .svc-mark .a1 { transform: translateY(-2px); }
+  .svc-row:hover .svc-mark .a2,
+  .svc-row[data-open="true"] .svc-mark .a2 { transform: translateY(0px); }
+  .svc-row:hover .svc-mark .a3,
+  .svc-row[data-open="true"] .svc-mark .a3 { transform: translateY(2px); }
+
+  .svc-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .7s cubic-bezier(.2,.7,.2,1);
+  }
+  .svc-panel > .svc-panel-inner { overflow: hidden; min-height: 0; }
+  .svc-row[data-open="true"] .svc-panel { grid-template-rows: 1fr; }
+
+  .svc-panel-body {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    gap: clamp(16px, 2.5vw, 48px);
+    padding: 0 24px clamp(32px, 4vw, 60px) 8px;
+    align-items: start;
+  }
+  .svc-row:hover .svc-panel-body,
+  .svc-row[data-open="true"] .svc-panel-body { padding-left: 20px; }
+
+  .svc-panel-content {
+    max-width: 60ch;
+    display: grid;
+    gap: 18px;
+    padding-top: 4px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .5s ease .15s, transform .5s ease .15s;
+  }
+  .svc-row[data-open="true"] .svc-panel-content { opacity: 1; transform: none; }
+
+  .svc-quote {
+    font-family: 'Instrument Serif', 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.05rem, 1.55vw, 1.35rem);
+    line-height: 1.4;
+    color: var(--white);
+    margin: 0;
+  }
+  .svc-quote::before {
+    content: "";
+    display: inline-block;
+    width: 20px; height: 1px;
+    background: var(--acid);
+    margin: 0 10px 5px 0;
+    vertical-align: middle;
+  }
+
+  .svc-text {
+    font-family: var(--font-body);
+    font-size: 0.93rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.62);
+    margin: 0;
+    font-weight: 300;
+  }
+
+  .svc-aside {
+    width: clamp(150px, 15vw, 210px);
+    display: grid;
+    gap: 16px;
+    padding-top: 4px;
+  }
+  .svc-stage {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 3px;
+    background:
+      linear-gradient(rgba(255,255,255,0.05), rgba(255,255,255,0.05)) center/100% 1px no-repeat,
+      linear-gradient(rgba(255,255,255,0.05), rgba(255,255,255,0.05)) center/1px 100% no-repeat;
+    display: grid; place-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .svc-stage::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(60% 60% at 50% 50%, rgba(232,80,10,0.14), transparent 70%);
+    opacity: 0;
+    transition: opacity .8s ease;
+  }
+  .svc-row[data-open="true"] .svc-stage::after { opacity: 1; }
+  .svc-stage svg { width: 60%; height: 60%; overflow: visible; color: rgba(255,255,255,0.65); }
+
+  .svc-best-for {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 10px;
+  }
+  .svc-best-for .k {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.62rem;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .svc-best-for .v {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.2rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--white);
+  }
+  .svc-best-for .v em { font-style: italic; color: var(--acid); }
+
+  .svc-cta-strip {
+    margin-top: clamp(36px, 4.5vw, 60px);
+    padding: clamp(22px, 2.6vw, 38px) 8px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .svc-cta-lhs {
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+    line-height: 1.3;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+  }
+  .svc-cta-lhs em { font-style: italic; color: var(--white); font-weight: 400; }
+  .svc-cta-btn {
+    all: unset;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--white);
+    padding: 12px 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 999px;
+    transition: border-color .3s ease, color .3s ease, padding-right .3s ease, background .3s ease;
+  }
+  .svc-cta-btn:hover {
+    border-color: var(--acid);
+    color: var(--acid);
+    padding-right: 26px;
+    background: rgba(232,80,10,0.07);
+  }
+  .svc-cta-arrow {
+    width: 14px; height: 1px;
+    background: currentColor;
+    position: relative;
+    flex-shrink: 0;
+    transition: width .3s ease;
+  }
+  .svc-cta-btn:hover .svc-cta-arrow { width: 20px; }
+  .svc-cta-arrow::after {
+    content: "";
+    position: absolute;
+    right: 0; top: -3px;
+    width: 7px; height: 7px;
+    border-top: 1px solid currentColor;
+    border-right: 1px solid currentColor;
+    transform: rotate(45deg);
+  }
+
+  @media (max-width: 820px) {
+    .svc-row-head { grid-template-columns: 52px 1fr 40px; gap: 12px; padding: 18px 4px; }
+    .svc-tag { display: none; }
+    .svc-mark { width: 40px; height: 40px; }
+    .svc-mark svg { width: 16px; height: 16px; }
+    .svc-panel-body { grid-template-columns: 52px 1fr; gap: 12px; padding: 0 4px 28px; }
+    .svc-aside { display: none; }
+    .svc-row:hover .svc-row-head, .svc-row[data-open="true"] .svc-row-head { padding-left: 8px; }
+    .svc-row:hover .svc-panel-body, .svc-row[data-open="true"] .svc-panel-body { padding-left: 8px; }
+    .svc-cta-strip { grid-template-columns: 1fr; gap: 14px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .svc-row { opacity: 1; transform: none; }
+  }
 
   /* ── MAINTENANCE PLAN ── */
   #maintenance { background: var(--ink); }
@@ -758,7 +1006,6 @@
     .hero-inner { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; gap: 0; }
     .hero-visual { display: none; }
     section { padding: 4rem 0; }
-    .services-grid { grid-template-columns: 1fr; }
     .plans-grid { grid-template-columns: 1fr; padding-top: 1.5rem; }
     .plan-card:hover { transform: none; box-shadow: none; border-color: rgba(255,255,255,0.08); }
     .quote-layout { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -1100,9 +1347,6 @@
     /* Form submit full-width (already 100%, but reinforce) */
     .form-submit { width: 100%; }
 
-    /* Service card padding tightened */
-    .service-card { padding: 2rem 1.75rem; }
-
     /* Plan modal mobile padding */
     .plan-details-box { padding: 2rem 1.5rem; }
     .plan-details-overlay { padding: 2rem 1rem; }
@@ -1131,10 +1375,6 @@
 
     h2.section-title { font-size: clamp(2rem, 8vw, 2.8rem); }
     .section-sub { font-size: 0.92rem; margin-bottom: 2rem; }
-
-    /* Service cards tighter */
-    .service-card { padding: 1.5rem 1.25rem; }
-    .service-card h3 { font-size: 1.35rem; }
 
     /* Plan cards */
     .plan-card { padding: 1.75rem 1.25rem; }
@@ -1347,45 +1587,272 @@
   <div class="wrap">
     <div class="section-label" data-i18n="svc-label">What We Do</div>
     <h2 class="section-title" data-i18n="svc-title">Our Services</h2>
-    <p class="section-sub" data-i18n="svc-sub">Whether you're launching from scratch or refreshing an outdated site, we've got a solution built for your business.</p>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-num">01</div>
-        <div class="service-icon">🏗️</div>
-        <h3 data-i18n="svc-1-title">New Business Websites</h3>
-        <p data-i18n="svc-1-desc">Starting from zero? We design and develop a professional site that establishes your brand, builds trust, and converts visitors into customers from day one.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">02</div>
-        <div class="service-icon">🔄</div>
-        <h3 data-i18n="svc-2-title">Website Redesigns</h3>
-        <p data-i18n="svc-2-desc">Already online but looking outdated? We modernize your existing site — faster load times, better mobile experience, and a fresh look that matches where your business is today.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">03</div>
-        <div class="service-icon">🛒</div>
-        <h3 data-i18n="svc-3-title">E-Commerce Setup</h3>
-        <p data-i18n="svc-3-desc">Ready to sell online? We build full e-commerce solutions — product pages, secure checkout, payment integration, and inventory management tailored to your needs.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">04</div>
-        <div class="service-icon">📈</div>
-        <h3 data-i18n="svc-4-title">SEO Optimization</h3>
-        <p data-i18n="svc-4-desc">We build every site with search engine visibility in mind — structured data, fast performance, local SEO, and keyword strategy so customers can actually find you.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">05</div>
-        <div class="service-icon">📱</div>
-        <h3 data-i18n="svc-5-title">Mobile-First Design</h3>
-        <p data-i18n="svc-5-desc">Over 60% of web traffic is mobile. Every site we build is fully responsive and optimized for phones and tablets — so your business looks great on every screen.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">06</div>
-        <div class="service-icon">🔧</div>
-        <h3 data-i18n="svc-6-title">Ongoing Maintenance</h3>
-        <p data-i18n="svc-6-desc">Websites need care. We offer monthly maintenance plans to keep your site secure, updated, backed up, and running smoothly — so you can focus on your business.</p>
-      </div>
+    <p class="section-sub" data-i18n="svc-sub">Whether you're launching from scratch or refreshing an outdated site, we've got a solution built for your business. Six disciplines — pick a row to read more.</p>
+
+    <div class="svc-meta-row">
+      <div class="svc-meta-key">Index <span>— six services</span></div>
+      <div class="svc-meta-key">Tap to expand</div>
     </div>
+
+    <div class="svc-list" id="svcList">
+
+      <!-- 01 -->
+      <article class="svc-row" data-open="false">
+        <button class="svc-row-head" type="button" aria-expanded="false">
+          <span class="svc-num">01 / 06</span>
+          <span class="svc-title">New Business <em>Websites</em></span>
+          <span class="svc-tag">From the ground up</span>
+          <span class="svc-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <rect data-anim class="a1" x="4" y="4"  width="16" height="3" rx="0.5"/>
+              <rect data-anim class="a2" x="4" y="10" width="16" height="3" rx="0.5"/>
+              <rect data-anim class="a3" x="4" y="16" width="10" height="3" rx="0.5"/>
+            </svg>
+          </span>
+        </button>
+        <div class="svc-panel"><div class="svc-panel-inner"><div class="svc-panel-body">
+          <div></div>
+          <div class="svc-panel-content">
+            <p class="svc-quote">Starting from zero is a privilege, not a&nbsp;problem.</p>
+            <p class="svc-text">We design and develop a professional site that establishes your brand, builds trust, and converts visitors into customers from day one.</p>
+          </div>
+          <aside class="svc-aside">
+            <div class="svc-stage" aria-hidden="true">
+              <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="0.6">
+                <rect x="6"  y="10" width="48" height="40" rx="1"/>
+                <line x1="6" y1="18" x2="54" y2="18"/>
+                <circle cx="11" cy="14" r="0.8" fill="currentColor"/>
+                <circle cx="14" cy="14" r="0.8" fill="currentColor"/>
+                <circle cx="17" cy="14" r="0.8" fill="currentColor"/>
+                <rect x="12" y="24" width="20" height="14" fill="currentColor" opacity="0.12"/>
+                <line x1="36" y1="24" x2="48" y2="24"/>
+                <line x1="36" y1="28" x2="48" y2="28"/>
+                <line x1="36" y1="32" x2="44" y2="32"/>
+                <line x1="12" y1="44" x2="48" y2="44"/>
+              </svg>
+            </div>
+            <div class="svc-best-for">
+              <div class="k">Best for</div>
+              <div class="v"><em>New</em> brands</div>
+            </div>
+          </aside>
+        </div></div></div>
+      </article>
+
+      <!-- 02 -->
+      <article class="svc-row" data-open="false">
+        <button class="svc-row-head" type="button" aria-expanded="false">
+          <span class="svc-num">02 / 06</span>
+          <span class="svc-title">Website <em>Redesigns</em></span>
+          <span class="svc-tag">Modernize what you have</span>
+          <span class="svc-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <rect data-anim class="a1" x="3" y="3" width="10" height="10" rx="0.5"/>
+              <rect data-anim class="a2" x="11" y="11" width="10" height="10" rx="0.5"/>
+            </svg>
+          </span>
+        </button>
+        <div class="svc-panel"><div class="svc-panel-inner"><div class="svc-panel-body">
+          <div></div>
+          <div class="svc-panel-content">
+            <p class="svc-quote">Already online but looking outdated? Let's fix the foundation, not the&nbsp;facade.</p>
+            <p class="svc-text">We modernize your existing site — faster load times, better mobile experience, and a fresh look that matches where your business is today.</p>
+          </div>
+          <aside class="svc-aside">
+            <div class="svc-stage" aria-hidden="true">
+              <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="0.6">
+                <rect x="6" y="14" width="22" height="32" rx="1" opacity="0.4"/>
+                <line x1="9" y1="20" x2="25" y2="20" opacity="0.4"/>
+                <line x1="9" y1="24" x2="25" y2="24" opacity="0.4"/>
+                <line x1="9" y1="28" x2="20" y2="28" opacity="0.4"/>
+                <line x1="30" y1="30" x2="36" y2="30"/>
+                <polyline points="33,27 36,30 33,33"/>
+                <rect x="38" y="14" width="22" height="32" rx="1" transform="translate(-6,0)"/>
+                <line x1="35" y1="20" x2="51" y2="20"/>
+                <rect x="35" y="24" width="16" height="10" fill="currentColor" opacity="0.18"/>
+                <line x1="35" y1="38" x2="45" y2="38"/>
+              </svg>
+            </div>
+            <div class="svc-best-for">
+              <div class="k">Best for</div>
+              <div class="v"><em>Established</em> sites</div>
+            </div>
+          </aside>
+        </div></div></div>
+      </article>
+
+      <!-- 03 -->
+      <article class="svc-row" data-open="false">
+        <button class="svc-row-head" type="button" aria-expanded="false">
+          <span class="svc-num">03 / 06</span>
+          <span class="svc-title">E-Commerce <em>Setup</em></span>
+          <span class="svc-tag">Sell online, properly</span>
+          <span class="svc-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <rect data-anim class="a1" x="5" y="7" width="14" height="13" rx="1"/>
+              <path data-anim class="a2" d="M9 7 V4 a3 3 0 0 1 6 0 V7"/>
+              <circle data-anim class="a3" cx="9" cy="13" r="0.9" fill="currentColor"/>
+            </svg>
+          </span>
+        </button>
+        <div class="svc-panel"><div class="svc-panel-inner"><div class="svc-panel-body">
+          <div></div>
+          <div class="svc-panel-content">
+            <p class="svc-quote">Ready to sell online? A storefront is half the work — the&nbsp;plumbing matters too.</p>
+            <p class="svc-text">We build full e-commerce solutions — product pages, secure checkout, payment integration, and inventory management tailored to your needs.</p>
+          </div>
+          <aside class="svc-aside">
+            <div class="svc-stage" aria-hidden="true">
+              <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="0.6">
+                <rect x="10" y="14" width="14" height="14" rx="0.5"/>
+                <rect x="26" y="14" width="14" height="14" rx="0.5" fill="currentColor" opacity="0.18"/>
+                <rect x="42" y="14" width="14" height="14" rx="0.5"/>
+                <rect x="10" y="32" width="14" height="14" rx="0.5"/>
+                <rect x="26" y="32" width="14" height="14" rx="0.5"/>
+                <rect x="42" y="32" width="14" height="14" rx="0.5" fill="currentColor" opacity="0.18"/>
+                <circle cx="50" cy="50" r="4" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="svc-best-for">
+              <div class="k">Best for</div>
+              <div class="v"><em>Online</em> stores</div>
+            </div>
+          </aside>
+        </div></div></div>
+      </article>
+
+      <!-- 04 -->
+      <article class="svc-row" data-open="false">
+        <button class="svc-row-head" type="button" aria-expanded="false">
+          <span class="svc-num">04 / 06</span>
+          <span class="svc-title">SEO <em>Optimization</em></span>
+          <span class="svc-tag">Be findable</span>
+          <span class="svc-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <circle data-anim class="a1" cx="10" cy="10" r="6"/>
+              <line data-anim class="a2" x1="14.5" y1="14.5" x2="20" y2="20"/>
+            </svg>
+          </span>
+        </button>
+        <div class="svc-panel"><div class="svc-panel-inner"><div class="svc-panel-body">
+          <div></div>
+          <div class="svc-panel-content">
+            <p class="svc-quote">A site no one finds is a&nbsp;secret. Let's make it&nbsp;known.</p>
+            <p class="svc-text">We build every site with search engine visibility in mind — structured data, fast performance, local SEO, and keyword strategy so customers can actually find you.</p>
+          </div>
+          <aside class="svc-aside">
+            <div class="svc-stage" aria-hidden="true">
+              <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="0.6">
+                <line x1="8" y1="44" x2="52" y2="44"/>
+                <rect x="12" y="34" width="6" height="10" fill="currentColor" opacity="0.2"/>
+                <rect x="22" y="28" width="6" height="16" fill="currentColor" opacity="0.35"/>
+                <rect x="32" y="22" width="6" height="22" fill="currentColor" opacity="0.55"/>
+                <rect x="42" y="14" width="6" height="30" fill="currentColor" opacity="0.85"/>
+                <polyline points="14,38 25,32 35,26 45,18" stroke-width="0.7"/>
+                <circle cx="45" cy="18" r="1.4" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="svc-best-for">
+              <div class="k">Best for</div>
+              <div class="v"><em>Growth</em> phases</div>
+            </div>
+          </aside>
+        </div></div></div>
+      </article>
+
+      <!-- 05 -->
+      <article class="svc-row" data-open="false">
+        <button class="svc-row-head" type="button" aria-expanded="false">
+          <span class="svc-num">05 / 06</span>
+          <span class="svc-title">Mobile-First <em>Design</em></span>
+          <span class="svc-tag">Built for the smallest screen</span>
+          <span class="svc-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <rect data-anim class="a1" x="7" y="3" width="10" height="18" rx="1.5"/>
+              <line data-anim class="a2" x1="11" y1="18.5" x2="13" y2="18.5"/>
+            </svg>
+          </span>
+        </button>
+        <div class="svc-panel"><div class="svc-panel-inner"><div class="svc-panel-body">
+          <div></div>
+          <div class="svc-panel-content">
+            <p class="svc-quote">Sixty percent of your traffic fits in a&nbsp;palm. Design for that&nbsp;first.</p>
+            <p class="svc-text">Over 60% of web traffic is mobile. Every site we build is fully responsive and optimized for phones and tablets — so your business looks great on every screen.</p>
+          </div>
+          <aside class="svc-aside">
+            <div class="svc-stage" aria-hidden="true">
+              <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="0.6">
+                <rect x="22" y="8" width="16" height="44" rx="2"/>
+                <line x1="28" y1="48" x2="32" y2="48"/>
+                <line x1="22" y1="13" x2="38" y2="13"/>
+                <rect x="25" y="17" width="10" height="6" fill="currentColor" opacity="0.18"/>
+                <line x1="25" y1="27" x2="35" y2="27"/>
+                <line x1="25" y1="30" x2="33" y2="30"/>
+                <line x1="25" y1="33" x2="35" y2="33"/>
+                <rect x="25" y="37" width="10" height="6" fill="currentColor" opacity="0.35"/>
+                <rect x="6"  y="20" width="12" height="20" rx="1" opacity="0.35"/>
+                <rect x="42" y="20" width="12" height="20" rx="1" opacity="0.35"/>
+              </svg>
+            </div>
+            <div class="svc-best-for">
+              <div class="k">Best for</div>
+              <div class="v"><em>Every</em> project</div>
+            </div>
+          </aside>
+        </div></div></div>
+      </article>
+
+      <!-- 06 -->
+      <article class="svc-row" data-open="false">
+        <button class="svc-row-head" type="button" aria-expanded="false">
+          <span class="svc-num">06 / 06</span>
+          <span class="svc-title">Ongoing <em>Maintenance</em></span>
+          <span class="svc-tag">Care after launch</span>
+          <span class="svc-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <circle data-anim class="a1" cx="12" cy="12" r="7"/>
+              <circle data-anim class="a2" cx="12" cy="12" r="2.5" fill="currentColor"/>
+              <line data-anim class="a3" x1="12" y1="3" x2="12" y2="6"/>
+            </svg>
+          </span>
+        </button>
+        <div class="svc-panel"><div class="svc-panel-inner"><div class="svc-panel-body">
+          <div></div>
+          <div class="svc-panel-content">
+            <p class="svc-quote">A website isn't furniture. It's a&nbsp;garden.</p>
+            <p class="svc-text">Websites need care. We offer monthly maintenance plans to keep your site secure, updated, backed up, and running smoothly — so you can focus on your business.</p>
+          </div>
+          <aside class="svc-aside">
+            <div class="svc-stage" aria-hidden="true">
+              <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="0.6">
+                <circle cx="30" cy="30" r="20"/>
+                <circle cx="30" cy="30" r="14" opacity="0.4"/>
+                <circle cx="30" cy="30" r="3" fill="currentColor"/>
+                <line x1="30" y1="6"  x2="30" y2="12"/>
+                <line x1="30" y1="48" x2="30" y2="54"/>
+                <line x1="6"  y1="30" x2="12" y2="30"/>
+                <line x1="48" y1="30" x2="54" y2="30"/>
+                <circle cx="30" cy="10" r="1.2" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="svc-best-for">
+              <div class="k">Best for</div>
+              <div class="v"><em>Live</em> sites</div>
+            </div>
+          </aside>
+        </div></div></div>
+      </article>
+
+    </div>
+
+    <div class="svc-cta-strip">
+      <div class="svc-cta-lhs">Not sure which fits? <em>Let's talk it through.</em></div>
+      <button class="svc-cta-btn" type="button" onclick="document.getElementById('quote').scrollIntoView({behavior:'smooth'})">
+        <span>Start a project</span>
+        <span class="svc-cta-arrow"></span>
+      </button>
+    </div>
+
   </div>
 </section>
 
@@ -1604,11 +2071,45 @@
       <a href="#maintenance" data-i18n="nav-maintenance">Plans</a>
       <a href="#quote" data-i18n="nav-contact">Contact</a>
       <a href="about.html" data-i18n="nav-about">About</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
     </div>
   </div>
 </footer>
 
 <script>
+// Services accordion
+(function(){
+  var svcRows = document.querySelectorAll('.svc-row');
+  svcRows.forEach(function(row){
+    var head = row.querySelector('.svc-row-head');
+    head.addEventListener('click', function(){
+      var isOpen = row.dataset.open === 'true';
+      svcRows.forEach(function(r){
+        r.dataset.open = 'false';
+        r.querySelector('.svc-row-head').setAttribute('aria-expanded','false');
+      });
+      if (!isOpen){
+        row.dataset.open = 'true';
+        head.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+  if (svcRows[0]){
+    svcRows[0].dataset.open = 'true';
+    svcRows[0].querySelector('.svc-row-head').setAttribute('aria-expanded','true');
+  }
+  var svcIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); svcIO.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  svcRows.forEach(function(r, i){
+    r.style.transitionDelay = (i * 60) + 'ms';
+    svcIO.observe(r);
+  });
+})();
+
 // Quote form validation + submission
 function submitQuote() {
   var fn    = document.getElementById('inputFn');

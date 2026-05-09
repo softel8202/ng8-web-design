@@ -775,11 +775,11 @@
     box-shadow: 0 0 0 3px rgba(232,74,58,0.15);
   }
 
-  /* ── PLAN QUOTE MODAL ── */
-  .plan-modal-overlay {
+  /* ── PLAN DETAILS MODAL ── */
+  .plan-details-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.78);
+    background: rgba(0,0,0,0.82);
     backdrop-filter: blur(4px);
     display: flex;
     align-items: flex-start;
@@ -791,45 +791,122 @@
     overflow-y: auto;
     padding: 4rem 1rem;
   }
-  .plan-modal-overlay.active {
-    opacity: 1;
-    pointer-events: all;
-  }
-  .plan-modal-box {
+  .plan-details-overlay.active { opacity: 1; pointer-events: all; }
+  .plan-details-box {
     background: var(--mid);
     border: 1px solid rgba(255,255,255,0.08);
     border-top: 3px solid var(--acid);
     padding: 2.5rem;
-    max-width: 560px;
+    max-width: 680px;
     width: 100%;
     position: relative;
     transform: translateY(24px);
     transition: transform 0.35s ease;
     margin: auto;
   }
-  .plan-modal-overlay.active .plan-modal-box { transform: translateY(0); }
-  .plan-modal-close {
+  .plan-details-overlay.active .plan-details-box { transform: translateY(0); }
+  .plan-details-close {
     position: absolute;
     top: 1rem; right: 1.2rem;
     background: none; border: none;
-    color: var(--muted); font-size: 1.4rem;
+    color: var(--muted); font-size: 1.6rem;
     cursor: pointer; line-height: 1;
     transition: color 0.2s;
+    padding: 0.2rem 0.4rem;
   }
-  .plan-modal-close:hover { color: var(--white); }
-  .plan-modal-title {
+  .plan-details-close:hover { color: var(--white); }
+  .plan-details-plan-name {
     font-family: var(--font-display);
-    font-size: 1.8rem;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .plan-details-price {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    color: var(--acid);
+    margin-bottom: 0.5rem;
+  }
+  .plan-details-sublabel {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: block;
+  }
+  .pd-inherits {
+    background: rgba(232,80,10,0.07);
+    border-left: 2px solid rgba(232,80,10,0.35);
+    padding: 0.6rem 1rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 1.75rem;
+    letter-spacing: 0.2px;
+  }
+  .pd-section { margin-bottom: 1.75rem; }
+  .pd-section:last-of-type { margin-bottom: 0; }
+  .pd-section-title {
+    font-family: var(--font-display);
+    font-size: 0.92rem;
     letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 0.3rem;
+    color: var(--acid);
+    margin-bottom: 0.7rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(232,80,10,0.18);
   }
-  .plan-modal-subtitle {
-    color: var(--muted);
-    font-size: 0.88rem;
-    margin-bottom: 1.75rem;
+  .pd-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.45rem; }
+  .pd-list > li {
+    color: #bbb;
+    font-size: 0.9rem;
     line-height: 1.6;
+    padding-left: 1.1rem;
+    position: relative;
   }
+  .pd-list > li::before { content: '\2013'; position: absolute; left: 0; color: var(--acid); }
+  .pd-sublist { list-style: none; padding: 0; margin: 0.5rem 0 0.25rem 1rem; display: flex; flex-direction: column; gap: 0.3rem; }
+  .pd-sublist li {
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.55;
+    padding-left: 1rem;
+    position: relative;
+  }
+  .pd-sublist li::before { content: '\00B7'; position: absolute; left: 0.25rem; color: var(--muted); font-size: 1.1rem; line-height: 1.3; }
+  .plan-details-cta {
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .plan-details-cta p { color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
+  .plan-details-cta a {
+    background: var(--acid);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.9rem 1.75rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+  .plan-details-cta a:hover { background: #cf4508; }
 
   /* ── QUOTE SUCCESS MODAL ── */
   .modal-overlay {
@@ -1027,8 +1104,8 @@
     .service-card { padding: 2rem 1.75rem; }
 
     /* Plan modal mobile padding */
-    .plan-modal-box { padding: 2rem 1.5rem; }
-    .plan-modal-overlay { padding: 2rem 1rem; }
+    .plan-details-box { padding: 2rem 1.5rem; }
+    .plan-details-overlay { padding: 2rem 1rem; }
 
     /* Footer logo size */
     .footer-logo-img { height: 50px; }
@@ -1062,8 +1139,8 @@
     /* Plan cards */
     .plan-card { padding: 1.75rem 1.25rem; }
     .plan-card-price { font-size: 3.5rem; }
-    .plan-modal-box { padding: 1.5rem 1.25rem; }
-    .plan-modal-overlay { padding: 1.5rem 0.75rem; }
+    .plan-details-box { padding: 1.5rem 1.25rem; }
+    .plan-details-overlay { padding: 1.5rem 0.75rem; }
 
     /* Quote form */
     .quote-form { padding: 1.75rem 1.25rem; }
@@ -1320,40 +1397,40 @@
     <p class="section-sub" data-i18n="mnt-sub">After your site launches, we keep it running at peak performance — so you can stay focused on running your business.</p>
     <div class="plans-grid">
 
-      <!-- TIER 1: Temp Site -->
-      <div class="plan-card" onclick="openPlanModal('Temp Site')">
-        <div class="plan-card-name">Temp Site</div>
+      <!-- TIER 1: Essentials Plan -->
+      <div class="plan-card" onclick="openPlanDetails('Essentials Plan')">
+        <div class="plan-card-name">Essentials Plan</div>
         <div class="plan-card-price"><sup>$</sup>35<sub>/mo</sub></div>
         <p class="plan-card-desc">A lightweight plan to keep your site live, secure, and monitored while your business gets off the ground.</p>
-        <button class="plan-card-cta plan-card-cta--outline">Get Started</button>
+        <button class="plan-card-cta plan-card-cta--outline">View Full Details</button>
         <div class="plan-card-divider"></div>
         <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Uptime & health monitoring</div></div>
         <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Domain & hosting management</div></div>
-        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Basic security patches</div></div>
-        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Minor content & image updates</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Basic security patches & updates</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Low-effort content & image swap</div></div>
         <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Email support (48-hr response)</div></div>
       </div>
 
-      <!-- TIER 2: Care Plan (featured) -->
-      <div class="plan-card" onclick="openPlanModal('Care Plan')">
+      <!-- TIER 2: Care Plan -->
+      <div class="plan-card" onclick="openPlanDetails('Care Plan')">
         <div class="plan-card-name">Care Plan</div>
         <div class="plan-card-price"><sup>$</sup>75<sub>/mo</sub></div>
-        <p class="plan-card-desc">Our most popular plan — everything you need to keep your site sharp, updated, and performing.</p>
-        <button class="plan-card-cta plan-card-cta--outline">Get Started</button>
+        <p class="plan-card-desc">For small business websites that need regular attention without the hassle of managing it yourself.</p>
+        <button class="plan-card-cta plan-card-cta--outline">View Full Details</button>
         <div class="plan-card-divider"></div>
-        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Everything in Temp Site</div></div>
-        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Monthly content & image updates</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Everything in Essentials Plan</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Limited content & image updates</div></div>
         <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Emergency fixes included</div></div>
-        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Monthly analytics report</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Monthly performance & analytics report</div></div>
         <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Priority support (24-hr response)</div></div>
       </div>
 
-      <!-- TIER 3: Hands Free -->
-      <div class="plan-card" onclick="openPlanModal('Hands Free')">
-        <div class="plan-card-name">Hands Free</div>
+      <!-- TIER 3: Auto Pilot -->
+      <div class="plan-card" onclick="openPlanDetails('Auto Pilot')">
+        <div class="plan-card-name">Auto Pilot</div>
         <div class="plan-card-price"><sup>$</sup>125<sub>/mo</sub></div>
         <p class="plan-card-desc">Full-service management — we handle everything so you never have to think about your website again.</p>
-        <button class="plan-card-cta plan-card-cta--outline">Get Started</button>
+        <button class="plan-card-cta plan-card-cta--outline">View Full Details</button>
         <div class="plan-card-divider"></div>
         <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Everything in Care Plan</div></div>
         <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Unlimited content & image swaps</div></div>
@@ -1473,66 +1550,18 @@
   </div>
 </section>
 
-<!-- PLAN QUOTE MODAL -->
-<div id="planModal" class="plan-modal-overlay" onclick="closePlanModal(event)">
-  <div class="plan-modal-box" onclick="event.stopPropagation()">
-    <button class="plan-modal-close" onclick="closePlanModal()">&times;</button>
-    <div id="pmModalTitle" class="plan-modal-title">Get Started</div>
-    <p class="plan-modal-subtitle">Fill out your info below and we'll be in touch within 24 hours.</p>
-    <div class="form-row">
-      <div class="form-group">
-        <label>First Name</label>
-        <input id="pmFn" type="text" placeholder="Jane" />
-      </div>
-      <div class="form-group">
-        <label>Last Name</label>
-        <input id="pmLn" type="text" placeholder="Smith" />
-      </div>
+<!-- PLAN DETAILS MODAL -->
+<div id="planDetailsModal" class="plan-details-overlay" onclick="closePlanDetails(event)">
+  <div class="plan-details-box" onclick="event.stopPropagation()">
+    <button class="plan-details-close" onclick="closePlanDetails()" aria-label="Close">&times;</button>
+    <div id="pdPlanName" class="plan-details-plan-name"></div>
+    <div id="pdPrice" class="plan-details-price"></div>
+    <span class="plan-details-sublabel">Full Feature Detail</span>
+    <div id="pdContent"></div>
+    <div class="plan-details-cta">
+      <p>Ready to get started? Request a free quote — no obligation.</p>
+      <a href="#quote" onclick="closePlanDetails()">Get a Free Quote &rarr;</a>
     </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Email</label>
-        <input id="pmEmail" type="email" placeholder="jane@mybusiness.com" />
-      </div>
-      <div class="form-group">
-        <label>Phone (optional)</label>
-        <input id="pmPhone" type="tel" placeholder="(555) 000-0000" />
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Business Name</label>
-      <input id="pmBiz" type="text" placeholder="My Small Business LLC" />
-    </div>
-    <div class="form-group">
-      <label>Project Type</label>
-      <select id="pmType">
-        <option value="" disabled>Select one...</option>
-        <option>Brand new website</option>
-        <option>Website redesign</option>
-        <option>E-commerce setup</option>
-        <option>Inquiry website</option>
-        <option>SEO optimization only</option>
-        <option selected>Maintenance plan only</option>
-        <option>Not sure yet</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Estimated Budget</label>
-      <select id="pmBudget">
-        <option value="" disabled selected>Select a range...</option>
-        <option>$250 – $500</option>
-        <option>$500 – $750</option>
-        <option>$750 – $1,000</option>
-        <option>$1,000 – $1,500</option>
-        <option>$1,500+</option>
-        <option>Not sure yet</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Tell us about your project</label>
-      <textarea id="pmDetails" style="resize:vertical;min-height:90px;"></textarea>
-    </div>
-    <button id="pmSubmitBtn" class="form-submit" onclick="submitPlanQuote()">Send My Quote Request →</button>
   </div>
 </div>
 
@@ -1741,82 +1770,167 @@ function closeQuoteModal(e) {
   });
 })();
 
-// Plan modal
-var planMessages = {
-  'Temp Site':  'I would like to add-on the Temp Site Maintenance Option.',
-  'Care Plan':  'I would like to add-on the Care Plan Maintenance Option.',
-  'Hands Free': 'I would like to add-on the Hands Free Maintenance Option.'
+// Plan Details Modal
+var planDetailsData = {
+  'Essentials Plan': {
+    price: '$35 / month',
+    inherits: null,
+    sections: [
+      { title: 'Monitoring &amp; Availability', items: [
+        { text: '24/7 uptime monitoring — instant alert if your site goes down' },
+        { text: 'Monthly uptime report included' }
+      ]},
+      { title: 'Hosting &amp; Infrastructure', items: [
+        { text: 'Managed hosting included — no separate hosting fees' },
+        { text: 'Domain management — renewal reminders and DNS support' }
+      ]},
+      { title: 'Security', items: [
+        { text: 'Monthly malware scans' },
+        { text: 'Basic security patches &amp; updates — plugin and CMS updates as needed' },
+        { text: 'Security issue notification' }
+      ]},
+      { title: 'Content Updates', items: [
+        { text: 'Low-effort content &amp; image swaps — up to 1 hour per month' },
+        { text: 'Text edits and image replacements' },
+        { text: 'Does not include layout changes, new pages, or redesigns' }
+      ]},
+      { title: 'Support', items: [
+        { text: 'Email support — 48-hour response guarantee' }
+      ]}
+    ]
+  },
+  'Care Plan': {
+    price: '$75 / month',
+    inherits: 'Everything in Essentials Plan, plus:',
+    sections: [
+      { title: 'Monitoring &amp; Availability', items: [
+        { text: 'All Essentials monitoring included' },
+        { text: 'Performance monitoring — page load speed tracked monthly' },
+        { text: 'Broken link scan — monthly check and fix' }
+      ]},
+      { title: 'Security', items: [
+        { text: 'All Essentials security included' },
+        { text: 'Weekly malware scans (upgraded from monthly)' },
+        { text: 'Security incident notification within 24 hours' }
+      ]},
+      { title: 'Content Updates', items: [
+        { text: 'Up to 2 hours of content and image updates per month' },
+        { text: 'Text edits, image swaps, menu/price updates, team page changes' },
+        { text: 'Blog post uploads (content provided by you)' },
+        { text: 'Minor layout tweaks within existing sections' },
+        { text: 'Does not include new pages or full redesigns' }
+      ]},
+      { title: 'Emergency Support', items: [
+        { text: 'Emergency fixes included — if something breaks, we fix it fast' },
+        { text: 'Bug fixes and display issues resolved within 24 hours' },
+        { text: 'Form errors, broken links, and functionality issues covered' }
+      ]},
+      { title: 'Reporting &amp; Analytics', items: [
+        { text: 'Monthly performance report including:', sub: ['Page load speed', 'Top visited pages', 'Traffic sources overview', 'Mobile vs. desktop breakdown'] },
+        { text: 'Google Analytics review and summary' }
+      ]},
+      { title: 'Consultation', items: [
+        { text: 'Monthly website consultation (30 minutes):', sub: ['Review what’s working and what isn’t', 'Discuss upcoming content needs', 'Answer any questions about your site'] }
+      ]},
+      { title: 'Support', items: [
+        { text: 'Priority email support — 24-hour response guarantee' },
+        { text: 'Direct line — your messages are flagged as priority' }
+      ]}
+    ]
+  },
+  'Auto Pilot': {
+    price: '$125 / month',
+    inherits: 'Everything in Care Plan, plus:',
+    sections: [
+      { title: 'Monitoring &amp; Availability', items: [
+        { text: 'All Care Plan monitoring included' },
+        { text: 'Bi-weekly performance checks (upgraded from monthly)' },
+        { text: 'Uptime alert escalation — immediate action taken if site goes down, no waiting' }
+      ]},
+      { title: 'Security', items: [
+        { text: 'All Care Plan security included' },
+        { text: 'Daily malware scans (upgraded from weekly)' },
+        { text: 'Proactive vulnerability patching — we update before issues arise' },
+        { text: 'Security audit summary included in monthly report' }
+      ]},
+      { title: 'Content Updates', items: [
+        { text: 'Unlimited content and image swaps' },
+        { text: 'Text edits, image updates, price/menu changes — no hour cap' },
+        { text: 'Blog post uploads (content provided by you) — unlimited' },
+        { text: 'Minor structural tweaks and section reorders' },
+        { text: 'New page additions — up to 1 per month included' }
+      ]},
+      { title: 'Emergency Support', items: [
+        { text: 'Same-day emergency response — issues resolved within hours, not days' },
+        { text: 'All bug fixes, broken functionality, and display issues covered' },
+        { text: 'Covers mobile-specific display issues and form errors' }
+      ]},
+      { title: 'SEO Monitoring &amp; Reporting', items: [
+        { text: 'Monthly SEO health report including:', sub: ['Keyword ranking snapshot', 'On-page SEO score', 'Meta title and description review', 'Image alt tag audit', 'Site speed score (Core Web Vitals)', 'Recommendations for improvement'] },
+        { text: 'Google Search Console monitoring' }
+      ]},
+      { title: 'Consultation', items: [
+        { text: 'On-demand website consultation — schedule anytime, no monthly limit' },
+        { text: 'Strategy sessions available for new promotions, seasonal updates, or business changes' },
+        { text: 'We proactively reach out with improvement recommendations — you don’t have to ask' }
+      ]},
+      { title: 'Monthly Strategy Check-In', items: [
+        { text: 'Dedicated monthly strategy call (up to 60 minutes):', sub: ['Full site performance review', 'SEO progress discussion', 'Content calendar planning', 'Upcoming goals and priorities'] }
+      ]},
+      { title: 'Support', items: [
+        { text: 'Priority email support — same-day response during business hours' },
+        { text: 'You are always first in the queue' }
+      ]}
+    ]
+  }
 };
 
-function openPlanModal(planName) {
+function buildPlanDetailsHTML(data) {
+  var html = '';
+  if (data.inherits) {
+    html += '<div class="pd-inherits">' + data.inherits + '</div>';
+  }
+  data.sections.forEach(function(section) {
+    html += '<div class="pd-section"><div class="pd-section-title">' + section.title + '</div><ul class="pd-list">';
+    section.items.forEach(function(item) {
+      html += '<li>' + item.text;
+      if (item.sub && item.sub.length) {
+        html += '<ul class="pd-sublist">';
+        item.sub.forEach(function(s) { html += '<li>' + s + '</li>'; });
+        html += '</ul>';
+      }
+      html += '</li>';
+    });
+    html += '</ul></div>';
+  });
+  return html;
+}
+
+function openPlanDetails(planName) {
+  var data = planDetailsData[planName];
+  if (!data) return;
   document.querySelectorAll('.plan-card').forEach(function(c) {
     var n = c.querySelector('.plan-card-name');
     c.classList.toggle('selected', !!(n && n.textContent.trim() === planName));
   });
-  document.getElementById('pmModalTitle').textContent = 'Get Started — ' + planName;
-  document.getElementById('pmDetails').value = planMessages[planName] || '';
-  document.getElementById('planModal').classList.add('active');
+  document.getElementById('pdPlanName').textContent = planName;
+  document.getElementById('pdPrice').textContent = data.price;
+  document.getElementById('pdContent').innerHTML = buildPlanDetailsHTML(data);
+  document.getElementById('planDetailsModal').classList.add('active');
+  document.body.classList.add('nav-locked');
 }
 
-function closePlanModal(e) {
-  if (!e || e.target === document.getElementById('planModal')) {
-    document.getElementById('planModal').classList.remove('active');
+function closePlanDetails(e) {
+  if (!e || e.target === document.getElementById('planDetailsModal')) {
+    document.getElementById('planDetailsModal').classList.remove('active');
+    document.body.classList.remove('nav-locked');
   }
 }
 
-function submitPlanQuote() {
-  var fn    = document.getElementById('pmFn');
-  var ln    = document.getElementById('pmLn');
-  var email = document.getElementById('pmEmail');
-  var type  = document.getElementById('pmType');
-
-  [fn, ln, email, type].forEach(function(el) { el.classList.remove('invalid'); });
-
-  var valid = true;
-  if (!fn.value.trim())    { fn.classList.add('invalid');    valid = false; }
-  if (!ln.value.trim())    { ln.classList.add('invalid');    valid = false; }
-  if (!type.value)         { type.classList.add('invalid');  valid = false; }
-  if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
-    email.classList.add('invalid'); valid = false;
-  }
-  if (!valid) return;
-
-  var btn = document.getElementById('pmSubmitBtn');
-  btn.disabled = true;
-  btn.textContent = 'Sending...';
-
-  fetch('/submit-quote', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      firstName:   fn.value.trim(),
-      lastName:    ln.value.trim(),
-      email:       email.value.trim(),
-      phone:       document.getElementById('pmPhone').value.trim(),
-      bizName:     document.getElementById('pmBiz').value.trim(),
-      projectType: type.value,
-      features:    [],
-      budget:      document.getElementById('pmBudget').value,
-      details:     document.getElementById('pmDetails').value.trim()
-    })
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    btn.disabled = false;
-    btn.textContent = 'Send My Quote Request →';
-    if (data.success) {
-      document.getElementById('planModal').classList.remove('active');
-      document.getElementById('quoteModal').classList.add('active');
-    } else {
-      alert('Something went wrong. Please email us directly at santos.hardel11@gmail.com');
-    }
-  })
-  .catch(function() {
-    btn.disabled = false;
-    btn.textContent = 'Send My Quote Request →';
-    alert('Something went wrong. Please email us directly at santos.hardel11@gmail.com');
-  });
-}
+// Close plan details on Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePlanDetails();
+});
 
 // Clear selected state when hovering a different plan card
 document.querySelectorAll('.plan-card').forEach(function(card) {

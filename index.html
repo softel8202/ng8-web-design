@@ -1648,6 +1648,15 @@ function closeQuoteModal(e) {
   var vid = document.getElementById('heroVideo');
   if (!vid) return;
 
+  // On mobile the hero visual is hidden — stop the video loading entirely to prevent
+  // the 240-frame ImageData buffer (~150MB) from crashing iOS Safari.
+  if (window.innerWidth < 1024) {
+    vid.pause();
+    vid.src = '';
+    vid.load();
+    return;
+  }
+
   var FPS = 24;
   var MS = 1000 / FPS;
   var MAX_FRAMES = 240;

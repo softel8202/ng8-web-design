@@ -326,113 +326,126 @@
 
   /* ── MAINTENANCE PLAN ── */
   #maintenance { background: var(--ink); }
-  .plan-solo {
-    max-width: 780px;
-    margin: 0 auto;
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+    padding-top: 2.5rem;
+  }
+  .plan-card {
     background: var(--mid);
     border: 1px solid rgba(255,255,255,0.08);
+    padding: 2.5rem;
     position: relative;
-    overflow: hidden;
-  }
-  .plan-solo::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--acid), var(--acid2));
-  }
-  .plan-solo-inner { padding: 3rem; }
-  .plan-solo-top {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    margin-bottom: 2rem;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
   }
-  .plan-solo-label {
+  .plan-card:hover {
+    transform: scale(1.04);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+    border-color: var(--acid);
+    z-index: 2;
+  }
+  .plan-card:hover .plan-card-cta,
+  .plan-card.selected .plan-card-cta {
+    background: var(--acid);
+    color: var(--white);
+    border-color: var(--acid);
+  }
+  .plan-card.selected {
+    border-color: var(--acid);
+  }
+  .plan-card-name {
     font-family: var(--font-display);
-    font-size: 2.2rem;
-    letter-spacing: 3px;
+    font-size: 2rem;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
   }
-  .plan-solo-tag {
-    font-size: 0.82rem;
-    color: var(--acid);
-    font-weight: 500;
-    letter-spacing: 0.5px;
-  }
-  .plan-solo-price {
+  .plan-card-price {
     font-family: var(--font-display);
-    font-size: 5.5rem;
+    font-size: 4.5rem;
     letter-spacing: 1px;
     line-height: 1;
+    margin-bottom: 1rem;
     color: var(--white);
-    white-space: nowrap;
   }
-  .plan-solo-price sup {
-    font-size: 2.2rem;
+  .plan-card-price sup {
+    font-size: 2rem;
     vertical-align: top;
-    margin-top: 0.9rem;
+    margin-top: 0.7rem;
     display: inline-block;
   }
-  .plan-solo-price sub {
-    font-size: 1.1rem;
+  .plan-card-price sub {
+    font-size: 1rem;
     color: var(--muted);
     font-family: var(--font-body);
     font-weight: 400;
     letter-spacing: 0;
   }
-  .plan-solo-features {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    margin-bottom: 2.5rem;
+  .plan-card-desc {
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.65;
+    margin-bottom: 1.75rem;
+  }
+  .plan-card-cta {
+    width: 100%;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.9rem;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    transition: background 0.2s, transform 0.15s, border-color 0.2s;
+  }
+  .plan-card-cta--solid {
+    background: var(--acid);
+    color: var(--white);
+    border: none;
+  }
+  .plan-card-cta--solid:hover { background: #cf4508; transform: translateY(-1px); }
+  .plan-card-cta--outline {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .plan-card-cta--outline:hover { border-color: var(--white); }
+  .plan-card-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.07);
+    margin-bottom: 1.5rem;
   }
   .plan-feat {
     display: flex;
     align-items: flex-start;
-    gap: 0.85rem;
-    padding: 0.9rem 0;
+    gap: 0.75rem;
+    padding: 0.65rem 0;
     border-bottom: 1px solid rgba(255,255,255,0.04);
   }
-  .plan-feat:nth-last-child(-n+2) { border-bottom: none; }
+  .plan-feat:last-child { border-bottom: none; }
   .plan-feat-icon {
-    width: 22px; height: 22px;
+    width: 20px; height: 20px;
     background: rgba(232,80,10,0.15);
     border: 1px solid rgba(232,80,10,0.35);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     color: var(--acid);
     font-weight: 800;
     margin-top: 2px;
   }
-  .plan-feat-text strong {
-    display: block;
-    font-size: 0.88rem;
-    color: var(--white);
-    margin-bottom: 0.2rem;
-  }
-  .plan-feat-text span {
-    font-size: 0.78rem;
+  .plan-feat-text {
+    font-size: 0.85rem;
     color: var(--muted);
-    line-height: 1.55;
+    line-height: 1.5;
   }
-  .plan-solo-cta {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.07);
-  }
-  .plan-solo-note {
-    font-size: 0.82rem;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-  .plan-solo-note strong { color: var(--white); }
 
   /* ── QUOTE FORM ── */
   #quote { background: var(--off); }
@@ -710,7 +723,7 @@
   .wp-auto       { background: linear-gradient(140deg, #1a1a1a 0%, #E8500A 100%); }
   .wp-realty     { background: linear-gradient(140deg, #0a2a3d 0%, #0e6b8a 100%); }
   .wp-fitness    { background: linear-gradient(140deg, #0d1f0d 0%, #1e7a3a 100%); }
-  .wp-dental     { background: linear-gradient(140deg, #0d2235 0%, #1565a8 100%); }
+  .wp-wedding    { background: linear-gradient(140deg, #2a0f20 0%, #7a2d52 100%); }
   .wp-coffee     { background: linear-gradient(140deg, #2e1503 0%, #7a4520 100%); }
   .work-card-title {
     font-weight: 600;
@@ -746,11 +759,8 @@
     .hero-visual { display: none; }
     section { padding: 4rem 0; }
     .services-grid { grid-template-columns: 1fr; }
-    .plan-solo-top { flex-direction: column; align-items: flex-start; }
-    .plan-solo-inner { padding: 2rem; }
-    .plan-solo-features { grid-template-columns: 1fr; }
-    .plan-feat:last-child { border-bottom: none; }
-    .plan-solo-cta { flex-direction: column; align-items: stretch; }
+    .plans-grid { grid-template-columns: 1fr; padding-top: 1.5rem; }
+    .plan-card:hover { transform: none; box-shadow: none; border-color: rgba(255,255,255,0.08); }
     .quote-layout { grid-template-columns: 1fr; gap: 2.5rem; }
     .footer-inner { flex-direction: column; padding: 2rem; text-align: center; }
     .footer-links { justify-content: center; }
@@ -763,6 +773,62 @@
   .form-group select.invalid {
     border-color: #e84a3a !important;
     box-shadow: 0 0 0 3px rgba(232,74,58,0.15);
+  }
+
+  /* ── PLAN QUOTE MODAL ── */
+  .plan-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.78);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    overflow-y: auto;
+    padding: 4rem 1rem;
+  }
+  .plan-modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .plan-modal-box {
+    background: var(--mid);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-top: 3px solid var(--acid);
+    padding: 2.5rem;
+    max-width: 560px;
+    width: 100%;
+    position: relative;
+    transform: translateY(24px);
+    transition: transform 0.35s ease;
+    margin: auto;
+  }
+  .plan-modal-overlay.active .plan-modal-box { transform: translateY(0); }
+  .plan-modal-close {
+    position: absolute;
+    top: 1rem; right: 1.2rem;
+    background: none; border: none;
+    color: var(--muted); font-size: 1.4rem;
+    cursor: pointer; line-height: 1;
+    transition: color 0.2s;
+  }
+  .plan-modal-close:hover { color: var(--white); }
+  .plan-modal-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .plan-modal-subtitle {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 1.75rem;
+    line-height: 1.6;
   }
 
   /* ── QUOTE SUCCESS MODAL ── */
@@ -834,6 +900,192 @@
     transition: background 0.2s;
   }
   .modal-close-btn:hover { background: #cf4508; }
+
+  /* ── HAMBURGER BUTTON ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+    transition: border-color 0.2s;
+    order: 2; /* sits between logo (order default 0) and nav-right (order 3) */
+  }
+  .nav-hamburger:hover { border-color: rgba(255,255,255,0.4); }
+  .hamburger-bar {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 1px;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+    transform-origin: center;
+  }
+
+  /* ── HAMBURGER → X MORPH ── */
+  nav.nav-open .hamburger-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  nav.nav-open .hamburger-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  nav.nav-open .hamburger-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ── MOBILE DROPDOWN MENU ── */
+  .nav-mobile-menu {
+    display: none;
+    width: 100%;
+    background: rgba(10,10,10,0.97);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+  }
+  .nav-mobile-links {
+    list-style: none;
+    padding: 1rem 0 1.5rem;
+  }
+  .nav-mobile-links li {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .nav-mobile-links li:last-child {
+    border-bottom: none;
+  }
+  .nav-mobile-links a {
+    display: block;
+    padding: 1rem 2rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s, background 0.2s;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .nav-mobile-links a:hover { color: var(--white); background: rgba(255,255,255,0.03); }
+  .nav-mobile-cta-item {
+    padding: 1.25rem 2rem 0.25rem;
+  }
+  .nav-mobile-cta {
+    width: 100%;
+    text-align: center;
+    min-height: 48px;
+  }
+
+  /* ── NAV OPEN STATE ── */
+  nav.nav-open .nav-mobile-menu {
+    max-height: 400px;
+  }
+
+  /* ── BODY SCROLL LOCK ── */
+  body.nav-locked { overflow: hidden; }
+
+  /* ── RESPONSIVE UPDATES ── */
+  @media (max-width: 1024px) {
+    /* Hamburger visible, nav-right hidden on mobile */
+    .nav-hamburger { display: flex; }
+    .nav-right { display: none; }
+    .nav-mobile-menu { display: block; }
+
+    /* Adjust logo size on mobile nav */
+    .nav-logo-img { height: 70px; }
+
+    /* Hero: reduce top padding, ensure content isn't buried */
+    .hero-inner { padding: 6rem 2rem 3rem; }
+    .hero h1 { font-size: clamp(3rem, 10vw, 4.5rem); }
+    .hero p { font-size: 1rem; }
+
+    /* Hero CTAs: full-width stacked */
+    .hero-btns { flex-direction: column; gap: 0.75rem; }
+    .hero-btns .btn-primary,
+    .hero-btns .btn-outline {
+      width: 100%;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* Quote form row → single column on mobile */
+    .form-row { grid-template-columns: 1fr; }
+
+    /* Form submit full-width (already 100%, but reinforce) */
+    .form-submit { width: 100%; }
+
+    /* Service card padding tightened */
+    .service-card { padding: 2rem 1.75rem; }
+
+    /* Plan modal mobile padding */
+    .plan-modal-box { padding: 2rem 1.5rem; }
+    .plan-modal-overlay { padding: 2rem 1rem; }
+
+    /* Footer logo size */
+    .footer-logo-img { height: 50px; }
+
+    /* Footer links wrap */
+    .footer-links { flex-wrap: wrap; gap: 1rem; justify-content: center; }
+
+    /* Work card tag: allow wrapping */
+    .work-card-tag { white-space: normal; }
+  }
+
+  /* ── SMALL PHONE BREAKPOINT (320–480px) ── */
+  @media (max-width: 480px) {
+    .nav-inner { padding: 0.9rem 1.25rem; }
+    .nav-logo-img { height: 56px; }
+
+    .hero-inner { padding: 5.5rem 1.25rem 2.5rem; }
+    .hero h1 { font-size: clamp(2.6rem, 12vw, 3.5rem); }
+    .hero p { font-size: 0.95rem; }
+
+    .wrap { padding: 0 1.25rem; }
+    section { padding: 3rem 0; }
+
+    h2.section-title { font-size: clamp(2rem, 8vw, 2.8rem); }
+    .section-sub { font-size: 0.92rem; margin-bottom: 2rem; }
+
+    /* Service cards tighter */
+    .service-card { padding: 1.5rem 1.25rem; }
+    .service-card h3 { font-size: 1.35rem; }
+
+    /* Plan cards */
+    .plan-card { padding: 1.75rem 1.25rem; }
+    .plan-card-price { font-size: 3.5rem; }
+    .plan-modal-box { padding: 1.5rem 1.25rem; }
+    .plan-modal-overlay { padding: 1.5rem 0.75rem; }
+
+    /* Quote form */
+    .quote-form { padding: 1.75rem 1.25rem; }
+    .check-chip { font-size: 0.75rem; padding: 0.5rem 0.75rem; }
+
+    /* Work grid: 2 col still OK on 320px — just tighten gap */
+    .work-grid { gap: 0.75rem; }
+    .work-card-title { font-size: 0.85rem; }
+    .work-card-tag { font-size: 0.72rem; }
+
+    /* Footer */
+    .footer-inner { padding: 1.5rem 1.25rem; }
+    .footer-links { gap: 0.75rem; }
+    .footer-links a { font-size: 0.75rem; }
+
+    /* Social strip */
+    .social-strip-inner { padding: 0 1.25rem; gap: 0.5rem; }
+    .social-label { display: none; } /* too tight at 320px */
+
+    /* Modals */
+    .modal-box { padding: 2rem 1.25rem; width: 95%; }
+  }
 </style>
 </head>
 <body>
@@ -849,9 +1101,25 @@
       <li><a href="#quote" data-i18n="nav-contact">Contact</a></li>
       <li><a href="about.html" data-i18n="nav-about">About Us</a></li>
     </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation menu" aria-expanded="false">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
     <div class="nav-right">
       <button class="nav-cta" data-i18n="nav-cta" onclick="document.getElementById('quote').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
     </div>
+  </div>
+  <!-- Mobile dropdown nav -->
+  <div class="nav-mobile-menu" id="navMobileMenu" aria-hidden="true">
+    <ul class="nav-mobile-links">
+      <li><a href="#work" data-i18n="nav-projects">Projects</a></li>
+      <li><a href="#services" data-i18n="nav-services">Services</a></li>
+      <li><a href="#maintenance" data-i18n="nav-maintenance">Maintenance</a></li>
+      <li><a href="#quote" data-i18n="nav-contact">Contact</a></li>
+      <li><a href="about.html" data-i18n="nav-about">About Us</a></li>
+      <li class="nav-mobile-cta-item"><button class="nav-cta nav-mobile-cta" onclick="closeNav();document.getElementById('quote').scrollIntoView({behavior:'smooth'})">Get a Quote</button></li>
+    </ul>
   </div>
 </nav>
 
@@ -956,13 +1224,13 @@
       </a>
 
       <a href="#quote" class="work-card">
-        <div class="work-preview wp-dental">
+        <div class="work-preview wp-wedding">
           <div class="wp-nav"><div class="wp-dot"></div><div class="wp-dot"></div><div class="wp-dot"></div><div class="wp-bar"></div></div>
           <div class="wp-hero"><div class="wp-h1"></div><div class="wp-h2"></div><div class="wp-btn"></div></div>
           <div class="wp-body"><div class="wp-line l"></div><div class="wp-line m"></div><div class="wp-line s"></div></div>
         </div>
         <div class="work-card-title">Coming Soon ..</div>
-        <div class="work-card-tag" data-i18n="tag-dental">Healthcare</div>
+        <div class="work-card-tag">Wedding</div>
       </a>
 
       <a href="#quote" class="work-card">
@@ -1050,68 +1318,50 @@
     <div class="section-label" data-i18n="mnt-label">Peace of Mind</div>
     <h2 class="section-title" data-i18n="mnt-title">Worry-Free Maintenance</h2>
     <p class="section-sub" data-i18n="mnt-sub">After your site launches, we keep it running at peak performance — so you can stay focused on running your business.</p>
-    <div class="plan-solo">
-      <div class="plan-solo-inner">
+    <div class="plans-grid">
 
-        <div class="plan-solo-top">
-          <div>
-            <div class="plan-solo-label" data-i18n="plan-label">Care Plan</div>
-            <div class="plan-solo-tag" data-i18n="plan-tag">Month-to-month &nbsp;·&nbsp; Cancel anytime, no questions asked</div>
-          </div>
-          <div class="plan-solo-price"><sup>$</sup>150<sub>/mo</sub></div>
-        </div>
-
-        <div class="plan-solo-features">
-          <div class="plan-feat">
-            <div class="plan-feat-icon">✓</div>
-            <div class="plan-feat-text">
-              <strong data-i18n="feat-1-title">Routine Health Checks</strong>
-              <span data-i18n="feat-1-desc">Regular monitoring to ensure your site is always operational and functioning properly.</span>
-            </div>
-          </div>
-          <div class="plan-feat">
-            <div class="plan-feat-icon">✓</div>
-            <div class="plan-feat-text">
-              <strong data-i18n="feat-2-title">Domain & Deployment Setup</strong>
-              <span data-i18n="feat-2-desc">We handle all the technical setup — domain configuration, hosting, and going live.</span>
-            </div>
-          </div>
-          <div class="plan-feat">
-            <div class="plan-feat-icon">✓</div>
-            <div class="plan-feat-text">
-              <strong data-i18n="feat-3-title">Emergency Fixes Included</strong>
-              <span data-i18n="feat-3-desc">If something breaks, we fix it fast — no extra charge, no runaround.</span>
-            </div>
-          </div>
-          <div class="plan-feat">
-            <div class="plan-feat-icon">✓</div>
-            <div class="plan-feat-text">
-              <strong data-i18n="feat-4-title">Monthly Analytics Review</strong>
-              <span data-i18n="feat-4-desc">A clear monthly report on your traffic, visitor behavior, and what's working.</span>
-            </div>
-          </div>
-          <div class="plan-feat">
-            <div class="plan-feat-icon">✓</div>
-            <div class="plan-feat-text">
-              <strong data-i18n="feat-5-title">Website Updates</strong>
-              <span data-i18n="feat-5-desc">Small content tweaks, image swaps, or layout adjustments — handled for you.</span>
-            </div>
-          </div>
-          <div class="plan-feat">
-            <div class="plan-feat-icon">✓</div>
-            <div class="plan-feat-text">
-              <strong data-i18n="feat-6-title">48-Hour Email Support</strong>
-              <span data-i18n="feat-6-desc">Reach us anytime. Every question gets a personal response within 2 business days.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="plan-solo-cta">
-          <button class="btn-primary" data-i18n="plan-cta" onclick="document.getElementById('quote').scrollIntoView({behavior:'smooth'})">Get Started Today</button>
-          <p class="plan-solo-note" data-i18n-html="plan-note-html"><strong>No contracts. No lock-in.</strong> Start or stop whenever you want — we'll never hold you to a term or ask why.</p>
-        </div>
-
+      <!-- TIER 1: Temp Site -->
+      <div class="plan-card" onclick="openPlanModal('Temp Site')">
+        <div class="plan-card-name">Temp Site</div>
+        <div class="plan-card-price"><sup>$</sup>35<sub>/mo</sub></div>
+        <p class="plan-card-desc">A lightweight plan to keep your site live, secure, and monitored while your business gets off the ground.</p>
+        <button class="plan-card-cta plan-card-cta--outline">Get Started</button>
+        <div class="plan-card-divider"></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Uptime & health monitoring</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Domain & hosting management</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Basic security patches</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Minor content & image updates</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Email support (48-hr response)</div></div>
       </div>
+
+      <!-- TIER 2: Care Plan (featured) -->
+      <div class="plan-card" onclick="openPlanModal('Care Plan')">
+        <div class="plan-card-name">Care Plan</div>
+        <div class="plan-card-price"><sup>$</sup>75<sub>/mo</sub></div>
+        <p class="plan-card-desc">Our most popular plan — everything you need to keep your site sharp, updated, and performing.</p>
+        <button class="plan-card-cta plan-card-cta--outline">Get Started</button>
+        <div class="plan-card-divider"></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Everything in Temp Site</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Monthly content & image updates</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Emergency fixes included</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Monthly analytics report</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Priority support (24-hr response)</div></div>
+      </div>
+
+      <!-- TIER 3: Hands Free -->
+      <div class="plan-card" onclick="openPlanModal('Hands Free')">
+        <div class="plan-card-name">Hands Free</div>
+        <div class="plan-card-price"><sup>$</sup>125<sub>/mo</sub></div>
+        <p class="plan-card-desc">Full-service management — we handle everything so you never have to think about your website again.</p>
+        <button class="plan-card-cta plan-card-cta--outline">Get Started</button>
+        <div class="plan-card-divider"></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Everything in Care Plan</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Unlimited content & image swaps</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">SEO monitoring & reporting</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Monthly strategy check-in</div></div>
+        <div class="plan-feat"><div class="plan-feat-icon">✓</div><div class="plan-feat-text">Same-day emergency response</div></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1222,6 +1472,69 @@
     </div>
   </div>
 </section>
+
+<!-- PLAN QUOTE MODAL -->
+<div id="planModal" class="plan-modal-overlay" onclick="closePlanModal(event)">
+  <div class="plan-modal-box" onclick="event.stopPropagation()">
+    <button class="plan-modal-close" onclick="closePlanModal()">&times;</button>
+    <div id="pmModalTitle" class="plan-modal-title">Get Started</div>
+    <p class="plan-modal-subtitle">Fill out your info below and we'll be in touch within 24 hours.</p>
+    <div class="form-row">
+      <div class="form-group">
+        <label>First Name</label>
+        <input id="pmFn" type="text" placeholder="Jane" />
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input id="pmLn" type="text" placeholder="Smith" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Email</label>
+        <input id="pmEmail" type="email" placeholder="jane@mybusiness.com" />
+      </div>
+      <div class="form-group">
+        <label>Phone (optional)</label>
+        <input id="pmPhone" type="tel" placeholder="(555) 000-0000" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Business Name</label>
+      <input id="pmBiz" type="text" placeholder="My Small Business LLC" />
+    </div>
+    <div class="form-group">
+      <label>Project Type</label>
+      <select id="pmType">
+        <option value="" disabled>Select one...</option>
+        <option>Brand new website</option>
+        <option>Website redesign</option>
+        <option>E-commerce setup</option>
+        <option>Inquiry website</option>
+        <option>SEO optimization only</option>
+        <option selected>Maintenance plan only</option>
+        <option>Not sure yet</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Estimated Budget</label>
+      <select id="pmBudget">
+        <option value="" disabled selected>Select a range...</option>
+        <option>$250 – $500</option>
+        <option>$500 – $750</option>
+        <option>$750 – $1,000</option>
+        <option>$1,000 – $1,500</option>
+        <option>$1,500+</option>
+        <option>Not sure yet</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Tell us about your project</label>
+      <textarea id="pmDetails" style="resize:vertical;min-height:90px;"></textarea>
+    </div>
+    <button id="pmSubmitBtn" class="form-submit" onclick="submitPlanQuote()">Send My Quote Request →</button>
+  </div>
+</div>
 
 <!-- QUOTE SUCCESS MODAL -->
 <div id="quoteModal" class="modal-overlay" onclick="closeQuoteModal(event)">
@@ -1416,6 +1729,147 @@ function closeQuoteModal(e) {
     disp.style.opacity = '1';
     disp.style.display = 'block';
     rafId = requestAnimationFrame(reverseLoop);
+  });
+})();
+
+// Plan modal
+var planMessages = {
+  'Temp Site':  'I would like to add-on the Temp Site Maintenance Option.',
+  'Care Plan':  'I would like to add-on the Care Plan Maintenance Option.',
+  'Hands Free': 'I would like to add-on the Hands Free Maintenance Option.'
+};
+
+function openPlanModal(planName) {
+  document.querySelectorAll('.plan-card').forEach(function(c) {
+    var n = c.querySelector('.plan-card-name');
+    c.classList.toggle('selected', !!(n && n.textContent.trim() === planName));
+  });
+  document.getElementById('pmModalTitle').textContent = 'Get Started — ' + planName;
+  document.getElementById('pmDetails').value = planMessages[planName] || '';
+  document.getElementById('planModal').classList.add('active');
+}
+
+function closePlanModal(e) {
+  if (!e || e.target === document.getElementById('planModal')) {
+    document.getElementById('planModal').classList.remove('active');
+  }
+}
+
+function submitPlanQuote() {
+  var fn    = document.getElementById('pmFn');
+  var ln    = document.getElementById('pmLn');
+  var email = document.getElementById('pmEmail');
+  var type  = document.getElementById('pmType');
+
+  [fn, ln, email, type].forEach(function(el) { el.classList.remove('invalid'); });
+
+  var valid = true;
+  if (!fn.value.trim())    { fn.classList.add('invalid');    valid = false; }
+  if (!ln.value.trim())    { ln.classList.add('invalid');    valid = false; }
+  if (!type.value)         { type.classList.add('invalid');  valid = false; }
+  if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+    email.classList.add('invalid'); valid = false;
+  }
+  if (!valid) return;
+
+  var btn = document.getElementById('pmSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  fetch('/submit-quote', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      firstName:   fn.value.trim(),
+      lastName:    ln.value.trim(),
+      email:       email.value.trim(),
+      phone:       document.getElementById('pmPhone').value.trim(),
+      bizName:     document.getElementById('pmBiz').value.trim(),
+      projectType: type.value,
+      features:    [],
+      budget:      document.getElementById('pmBudget').value,
+      details:     document.getElementById('pmDetails').value.trim()
+    })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    btn.disabled = false;
+    btn.textContent = 'Send My Quote Request →';
+    if (data.success) {
+      document.getElementById('planModal').classList.remove('active');
+      document.getElementById('quoteModal').classList.add('active');
+    } else {
+      alert('Something went wrong. Please email us directly at santos.hardel11@gmail.com');
+    }
+  })
+  .catch(function() {
+    btn.disabled = false;
+    btn.textContent = 'Send My Quote Request →';
+    alert('Something went wrong. Please email us directly at santos.hardel11@gmail.com');
+  });
+}
+
+// Clear selected state when hovering a different plan card
+document.querySelectorAll('.plan-card').forEach(function(card) {
+  card.addEventListener('mouseenter', function() {
+    document.querySelectorAll('.plan-card').forEach(function(c) {
+      if (c !== card) c.classList.remove('selected');
+    });
+  });
+});
+
+// ── HAMBURGER NAV ──
+(function () {
+  var hamburger = document.getElementById('navHamburger');
+  var nav = document.querySelector('nav');
+  var mobileMenu = document.getElementById('navMobileMenu');
+  if (!hamburger || !nav || !mobileMenu) return;
+
+  function openNav() {
+    nav.classList.add('nav-open');
+    document.body.classList.add('nav-locked');
+    hamburger.setAttribute('aria-expanded', 'true');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeNav() {
+    nav.classList.remove('nav-open');
+    document.body.classList.remove('nav-locked');
+    hamburger.setAttribute('aria-expanded', 'false');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+  }
+
+  // Expose closeNav globally so inline onclick on mobile CTA can call it
+  window.closeNav = closeNav;
+
+  hamburger.addEventListener('click', function () {
+    if (nav.classList.contains('nav-open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  // Close on any mobile nav link click
+  mobileMenu.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      closeNav();
+    });
+  });
+
+  // Close when clicking outside nav
+  document.addEventListener('click', function (e) {
+    if (nav.classList.contains('nav-open') && !nav.contains(e.target)) {
+      closeNav();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
+      closeNav();
+      hamburger.focus();
+    }
   });
 })();
 

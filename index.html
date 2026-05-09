@@ -58,13 +58,15 @@
     justify-content: space-between;
   }
   .nav-logo {
-    font-family: var(--font-display);
-    font-size: 1.8rem;
-    letter-spacing: 2px;
-    color: var(--white);
+    display: flex;
+    align-items: center;
     text-decoration: none;
   }
-  .nav-logo span { color: var(--acid); }
+  .nav-logo-img {
+    display: block;
+    height: 105px;
+    width: auto;
+  }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
     color: var(--muted);
@@ -190,45 +192,25 @@
   .hero-visual {
     display: flex; justify-content: center; align-items: center;
   }
-  .hero-card {
-    background: var(--mid);
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 2rem;
+  .hero-video-wrap {
     width: 100%;
-    max-width: 420px;
+    max-width: 520px;
     position: relative;
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
     animation: fadeIn 1s 0.4s ease both;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
   }
-  .hero-card::before {
+  .hero-video-wrap::before {
     content: '';
     position: absolute; top: 0; left: 0; right: 0; height: 3px;
     background: linear-gradient(90deg, var(--acid), var(--acid2));
+    z-index: 2;
   }
-  .card-bar {
-    display: flex; gap: 6px; margin-bottom: 1.2rem;
-  }
-  .card-bar span {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: rgba(255,255,255,0.15);
-  }
-  .card-bar span:first-child { background: #ff5f57; }
-  .card-bar span:nth-child(2) { background: #febc2e; }
-  .card-bar span:nth-child(3) { background: #28c840; }
-  .mock-line { height: 10px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-bottom: 0.65rem; }
-  .mock-line.w40 { width: 40%; }
-  .mock-line.w70 { width: 70%; }
-  .mock-line.w55 { width: 55%; }
-  .mock-line.w85 { width: 85%; }
-  .mock-line.w30 { width: 30%; }
-  .mock-block {
-    height: 80px;
-    background: rgba(232,80,10,0.08);
-    border: 1px solid rgba(232,80,10,0.2);
-    margin: 1rem 0;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .mock-block span {
-    font-size: 0.7rem; color: var(--acid); letter-spacing: 2px; text-transform: uppercase;
+  .hero-video-wrap video {
+    display: block;
+    width: 100%;
+    height: auto;
   }
   .hero-stat {
     position: absolute;
@@ -638,11 +620,15 @@
     gap: 1rem;
   }
   .footer-logo {
-    font-family: var(--font-display);
-    font-size: 1.5rem; letter-spacing: 2px;
-    text-decoration: none; color: var(--white);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
   }
-  .footer-logo span { color: var(--acid); }
+  .footer-logo-img {
+    display: block;
+    height: 62px;
+    width: auto;
+  }
   footer p { color: var(--muted); font-size: 0.8rem; }
   .footer-links { display: flex; gap: 2rem; }
   .footer-links a {
@@ -855,7 +841,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">GR8<span> WEB DESIGN</span></a>
+    <a href="index.html" class="nav-logo"><img src="brand_assets/Logo_Banner.png" alt="GR8 Web Design" class="nav-logo-img"></a>
     <ul class="nav-links">
       <li><a href="#work" data-i18n="nav-projects">Projects</a></li>
       <li><a href="#services" data-i18n="nav-services">Services</a></li>
@@ -886,17 +872,11 @@
     </div>
     <div class="hero-visual">
       <div style="position:relative;">
-        <div class="hero-stat stat-tl" data-i18n="hero-stat-tl">🚀 Live in 2 Weeks</div>
-        <div class="hero-card">
-          <div class="card-bar"><span></span><span></span><span></span></div>
-          <div class="mock-line w40"></div>
-          <div class="mock-line w70"></div>
-          <div class="mock-block"><span data-i18n="hero-mock">Your Website Here</span></div>
-          <div class="mock-line w85"></div>
-          <div class="mock-line w55"></div>
-          <div class="mock-line w30"></div>
+        <div class="hero-video-wrap">
+          <video autoplay muted playsinline id="heroVideo">
+            <source src="Video/WebBuilder2.mp4" type="video/mp4">
+          </video>
         </div>
-        <div class="hero-stat stat-br" data-i18n="hero-stat-br">⚡ SEO-Ready</div>
       </div>
     </div>
   </div>
@@ -1275,7 +1255,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <a href="index.html" class="footer-logo">GR8<span> WEB DESIGN</span></a>
+    <a href="index.html" class="footer-logo"><img src="brand_assets/Logo_Banner.png" alt="GR8 Web Design" class="footer-logo-img"></a>
     <p data-i18n="footer-copy">© 2025 GR8 Web Design. All rights reserved.</p>
     <div class="footer-links">
       <a href="#services" data-i18n="nav-services">Services</a>
@@ -1349,6 +1329,95 @@ function closeQuoteModal(e) {
     document.getElementById('quoteModal').classList.remove('active');
   }
 }
+
+// Hero video ping-pong loop — captures frames during forward play, replays in reverse on canvas
+(function () {
+  var vid = document.getElementById('heroVideo');
+  if (!vid) return;
+
+  var FPS = 24;
+  var MS = 1000 / FPS;
+  var MAX_FRAMES = 240;
+
+  var frames = [];
+  var capturing = false;
+  var reversing = false;
+  var lastTick = -Infinity;
+  var rafId;
+
+  var cap = document.createElement('canvas');
+  var capCtx = cap.getContext('2d');
+
+  var disp = document.createElement('canvas');
+  var dispCtx = disp.getContext('2d');
+  disp.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;display:none;opacity:1;transition:opacity 0.25s ease;';
+  vid.parentNode.appendChild(disp);
+
+  function initSize() {
+    var w = vid.clientWidth || vid.videoWidth || 520;
+    var h = vid.videoWidth ? Math.round(w * vid.videoHeight / vid.videoWidth) : Math.round(w * 9 / 16);
+    cap.width = disp.width = w;
+    cap.height = disp.height = h;
+  }
+
+  function captureLoop(ts) {
+    if (!capturing) return;
+    rafId = requestAnimationFrame(captureLoop);
+    if (ts - lastTick < MS) return;
+    lastTick = ts;
+    if (!vid.videoWidth || vid.ended) return;
+    if (frames.length === 0) initSize();
+    if (frames.length < MAX_FRAMES) {
+      capCtx.drawImage(vid, 0, 0, cap.width, cap.height);
+      frames.push(capCtx.getImageData(0, 0, cap.width, cap.height));
+    }
+  }
+
+  function reverseLoop(ts) {
+    if (!reversing) return;
+    rafId = requestAnimationFrame(reverseLoop);
+    if (ts - lastTick < MS) return;
+    lastTick = ts;
+    if (frames.length === 0) {
+      cancelAnimationFrame(rafId);
+      reversing = false;
+      // Seek video to start while canvas still covers it, then crossfade out
+      vid.currentTime = 0;
+      function onSeeked() {
+        vid.removeEventListener('seeked', onSeeked);
+        vid.play();
+        disp.style.opacity = '0';
+        setTimeout(function () {
+          disp.style.display = 'none';
+          disp.style.opacity = '1';
+        }, 280);
+      }
+      vid.addEventListener('seeked', onSeeked);
+      return;
+    }
+    dispCtx.putImageData(frames.pop(), 0, 0);
+  }
+
+  vid.addEventListener('play', function () {
+    if (reversing) return;
+    frames = [];
+    capturing = true;
+    lastTick = -Infinity;
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(captureLoop);
+  });
+
+  vid.addEventListener('ended', function () {
+    capturing = false;
+    cancelAnimationFrame(rafId);
+    reversing = true;
+    lastTick = -Infinity;
+    initSize();
+    disp.style.opacity = '1';
+    disp.style.display = 'block';
+    rafId = requestAnimationFrame(reverseLoop);
+  });
+})();
 
 // Coming soon tooltips
 (function () {

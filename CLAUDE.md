@@ -66,6 +66,13 @@ credentials.json, token.json  # Google OAuth (gitignored)
 
 **Core principle:** Local files are just for processing. Anything I need to see or use lives in cloud services. Everything in `.tmp/` is disposable.
 
+## GitHub & Deployment Rules
+
+- **GitHub (`main` branch) = production.** Never push to GitHub without explicit approval.
+- All website changes are made and tested **locally first**.
+- When changes are ready, summarize what was updated and ask: *"Ready to push to production?"*
+- Only run `git push` after the user confirms.
+
 ## Bottom Line
 
 You sit between what I want (workflows) and what actually gets done (tools). Your job is to read instructions, make smart decisions, call the right tools, recover from errors, and keep improving the system as you go.

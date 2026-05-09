@@ -54,13 +54,15 @@
     justify-content: space-between;
   }
   .nav-logo {
-    font-family: var(--font-display);
-    font-size: 1.8rem;
-    letter-spacing: 2px;
-    color: var(--white);
+    display: flex;
+    align-items: center;
     text-decoration: none;
   }
-  .nav-logo span { color: var(--acid); }
+  .nav-logo-img {
+    display: block;
+    height: 105px;
+    width: auto;
+  }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
     color: var(--muted);
@@ -540,11 +542,15 @@
     gap: 1rem;
   }
   .footer-logo {
-    font-family: var(--font-display);
-    font-size: 1.5rem; letter-spacing: 2px;
-    text-decoration: none; color: var(--white);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
   }
-  .footer-logo span { color: var(--acid); }
+  .footer-logo-img {
+    display: block;
+    height: 62px;
+    width: auto;
+  }
   footer p { color: var(--muted); font-size: 0.8rem; }
   .footer-links { display: flex; gap: 2rem; }
   .footer-links a {
@@ -590,7 +596,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">GR8<span> WEB DESIGN</span></a>
+    <a href="index.html" class="nav-logo"><img src="brand_assets/Logo_Banner.png" alt="GR8 Web Design" class="nav-logo-img"></a>
     <ul class="nav-links">
       <li><a href="index.html#work" data-i18n="nav-projects">Projects</a></li>
       <li><a href="index.html#services" data-i18n="nav-services">Services</a></li>
@@ -807,7 +813,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <a href="index.html" class="footer-logo">GR8<span> WEB DESIGN</span></a>
+    <a href="index.html" class="footer-logo"><img src="brand_assets/Logo_Banner.png" alt="GR8 Web Design" class="footer-logo-img"></a>
     <p data-i18n="footer-copy">© 2025 GR8 Web Design. All rights reserved.</p>
     <div class="footer-links">
       <a href="index.html#services" data-i18n="nav-services">Services</a>
